@@ -44,8 +44,7 @@ namespace TeaFanProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TeaFanProject v1"));
+                
             }
 
             app.UseHttpsRedirection();
@@ -56,6 +55,9 @@ namespace TeaFanProject
 
             app.UseAuthorization();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TeaFanProject v1"));
+
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "FrontEnd";
@@ -65,6 +67,7 @@ namespace TeaFanProject
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+            
         }
     }
 }
