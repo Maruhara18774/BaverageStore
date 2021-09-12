@@ -9,5 +9,6 @@ namespace TeaFanProject.Entities
     {
         public int FlavorID { get; set; }
         public string FlavorName { get; set; }
+        public virtual List<ProductTeaFlavor> ProductTeaFlavors { get; set; }
     }
 }

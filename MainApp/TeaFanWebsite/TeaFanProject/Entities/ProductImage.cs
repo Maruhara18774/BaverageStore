@@ -10,5 +10,6 @@ namespace TeaFanProject.Entities
         public int ImageID { get; set; }
         public int ProductID { get; set; }
         public string ImageLink { get; set; }
+        public Product Product { get; set; }
     }
 }

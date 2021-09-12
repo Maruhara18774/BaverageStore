@@ -12,5 +12,7 @@ namespace TeaFanProject.Entities
         public DateTime CreatedDate { get; set; }
         public double ShippingPrice { get; set; }
         public double Total { get; set; }
+        public virtual User User { get; set; }
+        public virtual List<CartDetail> CartDetails { get; set; }
     }
 }

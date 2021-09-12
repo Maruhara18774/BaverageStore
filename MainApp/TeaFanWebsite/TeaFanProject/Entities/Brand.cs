@@ -10,5 +10,6 @@ namespace TeaFanProject.Entities
         public int BrandID { get; set; }
         public string BrandName { get; set; }
         public string Origin { get; set; }
+        public virtual List<Product> Products { get; set; }
     }
 }

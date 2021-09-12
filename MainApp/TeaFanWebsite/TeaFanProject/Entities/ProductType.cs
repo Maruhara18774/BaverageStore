@@ -10,5 +10,8 @@ namespace TeaFanProject.Entities
         public int TypeID { get; set; }
         public string TypeName { get; set; }
         public int CategoryID { get; set; }
+        public int MyProperty { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual List<Product> Products { get; set; }
     }
 }

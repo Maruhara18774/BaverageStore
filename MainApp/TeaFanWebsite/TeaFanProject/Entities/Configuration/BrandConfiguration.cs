@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace TeaFanProject.Entities.Configuration
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class BrandConfiguration : IEntityTypeConfiguration<Brand>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Brand> builder)
         {
-            
+            builder.ToTable("Brands");
+            builder.HasKey(x => x.BrandID);
+
         }
     }
 }

@@ -13,5 +13,7 @@ namespace TeaFanProject.Entities
         public double SteepTime { get; set; }
         public double ServingSize { get; set; }
         public string Ingredients { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual List<ProductTeaFlavor> ProductTeaFlavors { get; set; }
     }
 }

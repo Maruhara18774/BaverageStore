@@ -13,5 +13,7 @@ namespace TeaFanProject.Entities
         public int Quantity { get; set; }
         public double SoldPrice { get; set; }
         public double Total { get; set; }
+        public virtual Cart Cart { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

@@ -12,5 +12,7 @@ namespace TeaFanProject.Entities
         public string Material { get; set; }
         public string Color { get; set; }
         public string CareInstruction { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual List<ProductOtherDemension> ProductOtherDemensions { get; set; }
     }
 }

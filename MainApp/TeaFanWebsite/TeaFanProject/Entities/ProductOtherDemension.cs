@@ -12,5 +12,7 @@ namespace TeaFanProject.Entities
         public int DemensionID { get; set; }
         public double Value { get; set; }
         public string Unit { get; set; }
+        public virtual ProductOther ProductOther { get; set; }
+        public virtual Demension Demension { get; set; }
     }
 }

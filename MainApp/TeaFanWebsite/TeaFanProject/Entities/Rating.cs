@@ -14,5 +14,7 @@ namespace TeaFanProject.Entities
         public int StarCount { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        public virtual User User { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

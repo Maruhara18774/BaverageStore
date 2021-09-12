@@ -10,5 +10,6 @@ namespace TeaFanProject.Entities
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public bool IsTypeOfTea { get; set; }
+        public virtual List<ProductType> ProductTypes { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace TeaFanProject.Entities
     {
         public int DemensionID { get; set; }
         public string DemensionName { get; set; }
+        public virtual List<ProductOtherDemension> OtherDemensions { get; set; }
     }
 }
