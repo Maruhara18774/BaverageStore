@@ -48,12 +48,7 @@ namespace TeaFanProject.Data
             builder.ApplyConfiguration(new CartConfiguration());
             builder.ApplyConfiguration(new CartDetailConfiguration());
 
-            builder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaims");
-            builder.Entity<IdentityUserRole<Guid>>().ToTable("UserRoles").HasKey(x => new { x.UserId, x.RoleId });
-            builder.Entity<IdentityUserLogin<Guid>>().ToTable("UserLogins").HasKey(x => x.UserId);
-            builder.Entity<IdentityUserToken<Guid>>().ToTable("UserTokens").HasKey(x => x.UserId);
-            builder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaims").HasKey(x => x.Id);
-
+            builder.Seed();
         }
     }
 }

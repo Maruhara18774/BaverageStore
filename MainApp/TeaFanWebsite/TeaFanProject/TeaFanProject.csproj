@@ -30,4 +30,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\TP006\" />
+    <Folder Include="wwwroot\Images\TP005\" />
+    <Folder Include="wwwroot\Images\TP004\" />
+    <Folder Include="wwwroot\Images\TP003\" />
+    <Folder Include="wwwroot\Images\TP002\" />
+    <Folder Include="wwwroot\Images\TP001\" />
+    <Folder Include="wwwroot\Images\TP000\" />
+  </ItemGroup>
+
 </Project>

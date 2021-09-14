@@ -9,9 +9,9 @@ namespace TeaFanProject.Entities
     {
         public int ProductTeaID { get; set; }
         public int ProductID { get; set; }
-        public double WaterTemperature { get; set; }
-        public double SteepTime { get; set; }
-        public double ServingSize { get; set; }
+        public string WaterTemperature { get; set; }
+        public string SteepTime { get; set; }
+        public string ServingSize { get; set; }
         public string Ingredients { get; set; }
         public virtual Product Product { get; set; }
         public virtual List<ProductTeaFlavor> ProductTeaFlavors { get; set; }

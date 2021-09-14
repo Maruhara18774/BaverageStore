@@ -8,6 +8,8 @@ using Microsoft.OpenApi.Models;
 using System;
 using TeaFanProject.Data;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace TeaFanProject
 {
@@ -57,7 +59,6 @@ namespace TeaFanProject
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TeaFanProject v1"));
-
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "FrontEnd";
@@ -67,7 +68,7 @@ namespace TeaFanProject
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
-            
+
         }
     }
 }
