@@ -21,10 +21,7 @@ function App() {
 
   if (user) {
     user = JSON.parse(user);
-  } else {
-    history.push("/login");
   }
-
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
