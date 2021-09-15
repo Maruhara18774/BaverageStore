@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace TeaFanProject.ViewModals.AccountService
 {
-    public class LoginRequest
+    public class RegistRequest
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public bool RememberMe { get; set; }
     }
 }

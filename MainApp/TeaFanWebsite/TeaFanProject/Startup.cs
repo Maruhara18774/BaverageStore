@@ -44,10 +44,16 @@ namespace TeaFanProject
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.Configure<IdentityOptions>(options =>
             {
-
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Lockout.AllowedForNewUsers = false;
             });
 
             services.AddTransient<SignInManager<User>, SignInManager<User>>();
+            services.AddTransient<UserManager<User>, UserManager<User>>();
 
             services.AddSpaStaticFiles(configuration =>
             {
