@@ -12,6 +12,9 @@ using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
 using TeaFanProject.Entities;
+using TeaFanProject.Infrastructures.Identity;
+using TeaFanProject.Application.Interfaces;
+using TeaFanProject.Application.Services;
 
 namespace TeaFanProject
 {
@@ -54,6 +57,8 @@ namespace TeaFanProject
 
             services.AddTransient<SignInManager<User>, SignInManager<User>>();
             services.AddTransient<UserManager<User>, UserManager<User>>();
+            services.AddTransient<ICurrentUser, CurrentUser>();
+            services.AddTransient<IAccountService, AccountService>();
 
             services.AddSpaStaticFiles(configuration =>
             {
