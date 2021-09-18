@@ -21,7 +21,7 @@ namespace TeaFanProject.Controllers
             _accountService = accountService;
         }
         [HttpGet("Profie")]
-        public async Task<TFResult<UserModal>> GetProfie()
+        public async Task<TFResult<UserModal>> GetProfieAsync()
         {
             var result = await _accountService.GetProfieAsync();
             if (result == null)
@@ -33,6 +33,29 @@ namespace TeaFanProject.Controllers
                 };
             }
             return new TFResult<UserModal>()
+            {
+                Code = 200,
+                Message = "Success",
+                Data = result
+            };
+        }
+
+        [HttpGet("History")]
+        public async Task<TFResult<List<OrderModal>>> GetHistoryAsync()
+        {
+            var result = await _accountService.GetHistoryAsync();
+            return new TFResult<List<OrderModal>>()
+            {
+                Code = 200,
+                Message = "Success",
+                Data = result
+            };
+        }
+        [HttpGet("History/{id}")]
+        public async Task<TFResult<OrderModal>> GetHistoryExpandAsync(int id)
+        {
+            var result = await _accountService.GetHistoryExpandAsync(id);
+            return new TFResult<OrderModal>()
             {
                 Code = 200,
                 Message = "Success",

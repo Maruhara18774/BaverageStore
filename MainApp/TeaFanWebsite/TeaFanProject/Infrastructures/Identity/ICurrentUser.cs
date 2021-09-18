@@ -8,6 +8,6 @@ namespace TeaFanProject.Infrastructures.Identity
     public interface ICurrentUser
     {
         string UserName { get; }
-        string UserId { get; }
+        Guid UserId { get; }
     }
 }

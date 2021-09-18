@@ -12,7 +12,7 @@ namespace TeaFanProject.Infrastructures.Identity
     {
         public string UserName { get => _httpContextAccessor.HttpContext.User.Identity.Name; }
 
-        public string UserId { get => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier); }
+        public Guid UserId { get => new Guid(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)); }
 
         private readonly IHttpContextAccessor _httpContextAccessor;
 

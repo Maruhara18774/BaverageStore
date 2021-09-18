@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,10 @@ namespace TeaFanProject.Application.Services
             _userManager = userManager;
             _currentUser = currentUser;
         }
+
         public async Task<UserModal> GetProfieAsync()
         {
-            var user = await _userManager.FindByIdAsync(_currentUser.UserId);
+            var user = await _userManager.FindByIdAsync(_currentUser.UserId.ToString());
             if (user!= null)
             {
                 return new UserModal()
@@ -41,6 +43,51 @@ namespace TeaFanProject.Application.Services
                 };
             }
             return null;
+        }
+        public async Task<List<OrderModal>> GetHistoryAsync()
+        {
+            var result = new List<OrderModal>();
+            var listOrder = await _context.Carts.Where(x => x.UserID == _currentUser.UserId && x.Total != 0).ToListAsync();
+            foreach(var item in listOrder)
+            {
+                result.Add(new OrderModal()
+                {
+                    OrderID = item.CartID,
+                    OrderDate = item.CreatedDate,
+                    Shipping = item.ShippingPrice,
+                    Total = item.Total
+                });
+            }
+            return result;
+        }
+
+        public async Task<OrderModal> GetHistoryExpandAsync(int cartID)
+        {
+            var cart = _context.Carts.Where(x => x.CartID == cartID).FirstOrDefault();
+            if (cart == null) return null;
+            var result = new OrderModal()
+            {
+                OrderID = cart.CartID,
+                OrderDate = cart.CreatedDate,
+                Shipping = cart.ShippingPrice,
+                Total = cart.Total,
+                OrderDetails = new List<OrderDetailModal>()
+            };
+            var details = await _context.CartDetails.Where(x => x.CartID == cartID).ToListAsync();
+            foreach(var item in details)
+            {
+                result.OrderDetails.Add(new OrderDetailModal()
+                {
+                    DetailID = item.CartDetailID,
+                    ProductID = item.ProductID,
+                    ProductName = _context.Products.Where(x => x.ProductID == item.ProductID).FirstOrDefault().ProductName,
+                    ImageURL = _context.ProductImages.Where(x => x.ProductID == item.ProductID).FirstOrDefault().ImageLink,
+                    Quantity = item.Quantity,
+                    SalePrice = item.SoldPrice,
+                    Total = item.Total
+                });
+            }
+            return result;
         }
     }
 }
