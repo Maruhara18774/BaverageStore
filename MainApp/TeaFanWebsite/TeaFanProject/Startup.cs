@@ -10,6 +10,11 @@ using TeaFanProject.Data;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.Identity;
+using TeaFanProject.Entities;
+using TeaFanProject.Infrastructures.Identity;
+using TeaFanProject.Application.Interfaces;
+using TeaFanProject.Application.Services;
 
 namespace TeaFanProject
 {
@@ -34,6 +39,27 @@ namespace TeaFanProject
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 );
+
+            services.AddDefaultIdentity<User>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            }).AddRoles<IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Lockout.AllowedForNewUsers = false;
+            });
+
+            services.AddTransient<SignInManager<User>, SignInManager<User>>();
+            services.AddTransient<UserManager<User>, UserManager<User>>();
+            services.AddTransient<ICurrentUser, CurrentUser>();
+            services.AddTransient<IAccountService, AccountService>();
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "FrontEnd/build";
@@ -55,10 +81,18 @@ namespace TeaFanProject
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TeaFanProject v1"));
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "FrontEnd";

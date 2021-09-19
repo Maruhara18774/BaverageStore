@@ -6,19 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Application\**" />
-    <Compile Remove="Controllers\**" />
-    <Content Remove="Application\**" />
-    <Content Remove="Controllers\**" />
-    <EmbeddedResource Remove="Application\**" />
-    <EmbeddedResource Remove="Controllers\**" />
-    <None Remove="Application\**" />
-    <None Remove="Controllers\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.18" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.9" />
@@ -38,6 +28,10 @@
     <Folder Include="wwwroot\Images\TP002\" />
     <Folder Include="wwwroot\Images\TP001\" />
     <Folder Include="wwwroot\Images\TP000\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TeaFanProject.ViewModals\TeaFanProject.ViewModals.csproj" />
   </ItemGroup>
 
 </Project>

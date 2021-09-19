@@ -4,14 +4,28 @@ import "./Login.css";
 import "antd/dist/antd.css";
 import { Form, Input, Button } from "antd";
 import { Link } from "react-router-dom";
-function index(props) {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+import LoginApi from "../../Api/LoginApi";
+import { useHistory } from "react-router-dom";
+function Login(props) {
+  const history = useHistory();
+  const onFormSubmit = (e) => {
+    var email = e.username;
+    var password = e.password;
+    LoginApi.login({
+      email: email,
+      password: password,
+    })
+      .then((data) => {
+        if (data.statusCode !== 200) {
+          /* Wrong username or password */
+        } else {
+          localStorage.setItem("user", JSON.stringify(data.data));
+          history.push("/home");
+        }
+      })
+      .catch((err) => console.error(err));
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
   return (
     <div>
       <div className="container">
@@ -31,8 +45,7 @@ function index(props) {
             initialValues={{
               remember: true,
             }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+            onFinish={onFormSubmit}
             autoComplete="off"
           >
             <Form.Item
@@ -93,4 +106,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Login;

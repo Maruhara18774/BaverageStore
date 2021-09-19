@@ -70,3 +70,9 @@ D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5
 D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\FrontEnd\package-lock.json
 D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\FrontEnd\package.json
 D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\FrontEnd\public\manifest.json
+D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\TeaFanProject.ViewModals.dll
+D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\TeaFanProject.ViewModals.pdb
+D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\TeaFanProject.StaticWebAssets.xml
+D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
+D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\Microsoft.AspNetCore.Identity.UI.dll
+D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject\bin\Debug\net5.0\Microsoft.Extensions.FileProviders.Embedded.dll
