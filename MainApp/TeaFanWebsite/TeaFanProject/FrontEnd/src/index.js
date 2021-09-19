@@ -1,21 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { Redirect, Route, Switch, BrowserRouter } from "react-router-dom";
-import Login from './Pages/Login'
-
+import Nav from "./Components/Nav";
+import Footer from "./Components/Footer";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 ReactDOM.render(
   <BrowserRouter>
-    <Switch>
-      <Route path="/login" render={() => <Login />} />
-      <Route path="/" render={(props) => <App {...props} />} />
-      <Redirect from="/" to="/home/index" />
-    </Switch>
+    <div className="wrapper" style={{ position: "relative" }}>
+      <Nav></Nav>
+      <Switch>
+        <Route path="/" render={(props) => <App {...props} />} />
+        <Redirect from="/" to="/home/index" />
+      </Switch>
+      <Footer></Footer>
+    </div>
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

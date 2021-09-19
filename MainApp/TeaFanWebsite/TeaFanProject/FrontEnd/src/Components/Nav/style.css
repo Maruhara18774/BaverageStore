@@ -1,17 +1,20 @@
 .navbar {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  z-index: 10000;
+  z-index: 1;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
 }
 .nav-header {
   width: 100%;
-  height: 9vh;
+  height: 5.2vh;
   padding-top: 20px;
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
 }
 .logo-content {
   width: 100%;
@@ -21,9 +24,15 @@
   display: flex;
 }
 .logo-text {
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
-  line-height: 0px;
+  line-height: 10px;
+  color: #99b351;
+}
+.logo-text h1 {
+  color: #99b351;
+  font-family: "Cabin Sketch", cursive;
+  font-weight: 700;
 }
 .logo-text p {
   font-family: "Cabin Sketch", cursive;
@@ -54,6 +63,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 6px;
 }
 .nav-footer ul li {
   list-style: none;
@@ -62,6 +72,6 @@
 .nav-footer ul li a {
   text-decoration: none;
   color: #99b351;
-  font-size: 20px;
+  font-size: 1.5vw;
   font-weight: bold;
 }

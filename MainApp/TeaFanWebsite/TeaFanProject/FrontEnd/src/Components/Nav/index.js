@@ -15,7 +15,7 @@ function index() {
           <img
             className="logo"
             src="https://cdn-icons-png.flaticon.com/512/1992/1992720.png"
-            alt=""
+            alt="logo"
           />
           <div className="logo-text">
             <h1>Tea Fan</h1>
@@ -34,9 +34,9 @@ function index() {
             </a>
           </li>
           <li>
-            <a href="">
+            <Link to="/login">
               <UserOutlined />
-            </a>
+            </Link>
           </li>
           <li>
             <a href="">

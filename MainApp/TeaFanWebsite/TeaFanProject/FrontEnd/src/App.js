@@ -9,7 +9,7 @@ import {
 
 // core components
 import routes from "./routes.js";
-import {Container, Col } from 'reactstrap'
+import { Container, Col } from "reactstrap";
 
 function App() {
   const mainContent = React.useRef(null);
