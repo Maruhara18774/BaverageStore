@@ -8,13 +8,9 @@ import LoginApi from "../../Api/LoginApi";
 import { useHistory } from "react-router-dom";
 function Login(props) {
   const history = useHistory();
+
   const onFormSubmit = (e) => {
-    var email = e.username;
-    var password = e.password;
-    LoginApi.login({
-      email: email,
-      password: password,
-    })
+    LoginApi.login(e)
       .then((data) => {
         if (data.statusCode !== 200) {
           /* Wrong username or password */
@@ -49,7 +45,7 @@ function Login(props) {
             autoComplete="off"
           >
             <Form.Item
-              name="username"
+              name="email"
               rules={[
                 {
                   required: true,

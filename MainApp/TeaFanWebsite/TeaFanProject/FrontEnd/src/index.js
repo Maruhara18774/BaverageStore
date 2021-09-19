@@ -3,19 +3,16 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Redirect, Route, Switch, BrowserRouter } from "react-router-dom";
-import Nav from "./Components/Nav";
-import Footer from "./Components/Footer";
+
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 ReactDOM.render(
   <BrowserRouter>
-    <div className="wrapper" style={{ position: "relative" }}>
-      <Nav></Nav>
+    <div>
       <Switch>
         <Route path="/" render={(props) => <App {...props} />} />
         <Redirect from="/" to="/home/index" />
       </Switch>
-      <Footer></Footer>
     </div>
   </BrowserRouter>,
   document.getElementById("root")

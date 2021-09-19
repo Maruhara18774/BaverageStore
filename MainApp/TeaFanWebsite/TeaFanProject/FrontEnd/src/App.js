@@ -6,7 +6,8 @@ import {
   useLocation,
   useHistory,
 } from "react-router-dom";
-
+import Nav from "./Components/Nav";
+import Footer from "./Components/Footer";
 // core components
 import routes from "./routes.js";
 import { Container, Col } from "reactstrap";
@@ -34,7 +35,12 @@ function App() {
   };
   return (
     <>
-      <div className="main-content" ref={mainContent}>
+      <div
+        className="main-content"
+        ref={mainContent}
+        style={{ minHeight: "100vh" }}
+      >
+        <Nav></Nav>
         <Container fluid className="d-flex pt-md-5 flex-column flex-md-row">
           <Col className="px-2 py-3">
             <Switch>

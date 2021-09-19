@@ -1,11 +1,9 @@
 footer {
   font-family: Arial, Helvetica, sans-serif;
-  bottom: 0;
   width: 100%;
-  margin: 0;
   background-color: #fff;
-  height: auto;
   position: absolute;
+  bottom: 0;
 }
 .footer-header {
   display: flex;
@@ -16,7 +14,7 @@ footer {
   padding: 8px;
 }
 .footer-input {
-  width: 30%;
+  width: 30% !important;
 }
 .shop-about {
   display: flex;
