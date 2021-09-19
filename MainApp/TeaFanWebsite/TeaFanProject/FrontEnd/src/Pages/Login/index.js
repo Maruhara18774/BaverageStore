@@ -10,10 +10,11 @@ function Login(props) {
   const history = useHistory();
 
   const onFormSubmit = (e) => {
+    e["rememberMe"] = false;
     LoginApi.login(e)
       .then((data) => {
+        console.log(data)
         if (data.statusCode !== 200) {
-          /* Wrong username or password */
         } else {
           localStorage.setItem("user", JSON.stringify(data.data));
           history.push("/home");

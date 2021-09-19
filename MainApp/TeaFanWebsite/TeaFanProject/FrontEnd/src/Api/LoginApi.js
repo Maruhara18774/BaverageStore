@@ -1,13 +1,11 @@
 import API from "./API.js";
-import axios from "axios";
-import { API_URL } from "../ConfigApi.js";
-import { message } from "antd";
+const baseURL = "/api/Login";
 
 const LoginApi = {
   login: async (request) => {
     try {
-      const url = API_URL + "/api/Login/Login";
-      var result = await API.Post(url, { params: request });
+      const url = baseURL + "/Login";
+      var result = await API.post(url, request);
       return result;
     } catch (error) {
       //alert(error);
