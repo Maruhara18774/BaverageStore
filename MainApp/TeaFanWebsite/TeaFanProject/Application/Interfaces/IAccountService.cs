@@ -12,5 +12,7 @@ namespace TeaFanProject.Application.Interfaces
         Task<UserModal> GetProfieAsync();
         Task<List<OrderModal>> GetHistoryAsync();
         Task<OrderModal> GetHistoryExpandAsync(int cartID);
+        Task<UserModal> EditProfieAsync(EditRequest request);
+        Task<bool> ChangePasswordAsync(string newPassword);
     }
 }

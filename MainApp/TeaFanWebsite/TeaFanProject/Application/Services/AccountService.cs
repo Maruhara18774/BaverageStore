@@ -89,5 +89,32 @@ namespace TeaFanProject.Application.Services
             }
             return result;
         }
+
+        public async Task<UserModal> EditProfieAsync(EditRequest request)
+        {
+            var user = _context.Users.Where(x => x.Id == _currentUser.UserId).FirstOrDefault();
+            if (user == null)
+            {
+                return null;
+            }
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.Address = request.Address;
+            user.PhoneNumber = request.PhoneNumber;
+            await _context.SaveChangesAsync();
+            return new UserModal()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Type = (await _userManager.GetRolesAsync(user))[0]
+            };
+        }
+
+        public Task<bool> ChangePasswordAsync(string newPassword)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
