@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Background from "./Background";
 import "./Login.css";
 import "antd/dist/antd.css";
@@ -8,19 +8,20 @@ import LoginApi from "../../Api/LoginApi";
 import { useHistory } from "react-router-dom";
 function Login(props) {
   const history = useHistory();
+  const [errorMessage,setErrorMessage] = useState("");
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = async (e) => {
     e["rememberMe"] = false;
-    LoginApi.login(e)
+    await LoginApi.login(e)
       .then((data) => {
-        console.log(data)
-        if (data.statusCode !== 200) {
-        } else {
+        if(data.code != 200){
+          setErrorMessage(data.message);
+        }
+        else{
           localStorage.setItem("user", JSON.stringify(data.data));
           history.push("/home");
         }
-      })
-      .catch((err) => console.error(err));
+      });
   };
 
   return (
@@ -72,7 +73,7 @@ function Login(props) {
                 placeholder="Password"
               />
             </Form.Item>
-
+            {errorMessage!=""?<p>{errorMessage}</p>:<></>}
             <Button className="submit-btn" type="primary" htmlType="submit">
               Login
             </Button>

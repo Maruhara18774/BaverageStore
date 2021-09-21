@@ -1,12 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Background from "./Background";
 import "./Register.css";
 import "antd/dist/antd.css";
 import { Form, Input, Button } from "antd";
 import { Link } from "react-router-dom";
-function index(props) {
-  const onFinish = (values) => {
-    console.log("Success:", values);
+import LoginApi from "../../Api/LoginApi";
+import { useHistory } from "react-router-dom";
+
+function RegistForm(props) {
+  const history = useHistory();
+  const [errorMessage,setErrorMessage] = useState("");
+
+  const onFinish = async (values) => {
+    if(values.password != values.confirmPassword){
+      setErrorMessage("Wrong confirm password");
+    }
+    else{
+      var request = {
+        "firstName": values.firstName,
+        "lastName": values.lastName,
+        "email": values.email,
+        "password": values.password
+      }
+      var result = await LoginApi.regist(request);
+      if(result.code != 200){
+        setErrorMessage(result.message)
+      }
+      else{
+        localStorage.setItem("user", JSON.stringify(result.data));
+        history.push("/home");
+      }
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -38,7 +62,7 @@ function index(props) {
             <div className="name-wrapper">
               <Form.Item
                 style={{ width: "35%" }}
-                name="name"
+                name="firstName"
                 rules={[
                   {
                     required: true,
@@ -51,7 +75,7 @@ function index(props) {
 
               <Form.Item
                 style={{ width: "60%" }}
-                name="lastname"
+                name="lastName"
                 rules={[
                   {
                     required: true,
@@ -63,11 +87,11 @@ function index(props) {
               </Form.Item>
             </div>
             <Form.Item
-              name="username"
+              name="email"
               rules={[
                 {
                   required: true,
-                  message: "Please input your username!",
+                  message: "Please input your email!",
                 },
               ]}
             >
@@ -90,7 +114,7 @@ function index(props) {
               />
             </Form.Item>
             <Form.Item
-              name="password"
+              name="confirmPassword"
               rules={[
                 {
                   required: true,
@@ -104,7 +128,7 @@ function index(props) {
                 placeholder="Confirm password"
               />
             </Form.Item>
-
+            {errorMessage!=""?<p>{errorMessage}</p>:<></>}
             <Button className="submit-btn" type="primary" htmlType="submit">
               Sign Up
             </Button>
@@ -134,4 +158,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default RegistForm;

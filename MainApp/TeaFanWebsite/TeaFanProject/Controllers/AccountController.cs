@@ -31,7 +31,7 @@ namespace TeaFanProject.Controllers
                     Code = 400,
                     Message = "User can not found"
                 };
-                return BadRequest(content2);
+                return Ok(content2);
             }
             var content =  new TFResult<ProfieModal>()
             {
@@ -79,7 +79,7 @@ namespace TeaFanProject.Controllers
                     Data = result
                 });
             }
-            return BadRequest(new TFResult<UserModal>()
+            return Ok(new TFResult<UserModal>()
             {
                 Code = 400,
                 Message = "Failed request"
@@ -98,7 +98,7 @@ namespace TeaFanProject.Controllers
                     Data = true
                 });
             }
-            return BadRequest(new TFResult<bool>()
+            return Ok(new TFResult<bool>()
             {
                 Code = 400,
                 Message = "Failed",

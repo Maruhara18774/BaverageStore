@@ -33,7 +33,7 @@ namespace TeaFanProject.Controllers
                     Code = 400,
                     Message = "Have null parameter"
                 };
-                return BadRequest(content);
+                return Ok(content);
             }
             var user = await _signInManager.UserManager.FindByEmailAsync(request.Email);
             if(user == null || user.DeletedDate != null)
@@ -44,7 +44,7 @@ namespace TeaFanProject.Controllers
                     Message = "User not found",
                     Data = null
                 };
-                return BadRequest(content);
+                return Ok(content);
             }
             var signInResult = await _signInManager.PasswordSignInAsync(request.Email, request.Password, request.RememberMe, false);
             if (signInResult.Succeeded)
@@ -73,7 +73,7 @@ namespace TeaFanProject.Controllers
                     Message = "Password is incorrect",
                     Data = null
                 };
-                return BadRequest(content);
+                return Ok(content);
             }
         }
         [HttpGet("Logout")]
@@ -94,7 +94,7 @@ namespace TeaFanProject.Controllers
                 Code = 401,
                 Message = "Did not login before"
             };
-            return BadRequest(content2);
+            return Ok(content2);
         }
         [AllowAnonymous]
         [HttpPost("Regist")]
@@ -108,7 +108,7 @@ namespace TeaFanProject.Controllers
                     Code = 402,
                     Message = "This email was used"
                 };
-                return BadRequest(content1);
+                return Ok(content1);
             }
             var user = new User()
             {
@@ -148,7 +148,7 @@ namespace TeaFanProject.Controllers
                 Code = 403,
                 Message = "Failed regist"
             };
-            return BadRequest(content);
+            return Ok(content);
         }
     }
 }

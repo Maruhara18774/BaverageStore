@@ -12,6 +12,13 @@ const LoginApi = {
       console.error(error);
     }
   },
+  regist: async (request) =>{
+    try{
+      const url = baseURL + "/Regist";
+      var result = await API.post(url, request);
+      return result;
+    }catch(err){console.log(err);}
+  }
 };
 export default LoginApi;
 
