@@ -3,17 +3,9 @@ import "antd/dist/antd.css";
 import "./Home.css";
 import { Carousel, Button } from "antd";
 function index() {
-  function onChange(a, b, c) {
-    console.log(a, b, c);
-  }
-
   return (
     <div className="home-container">
-      <Carousel
-        afterChange={onChange}
-        className="main-carousel"
-        autoplay="true"
-      >
+      <Carousel className="main-carousel" autoplay="true">
         <div className="carousel-item">
           <img
             src="https://cdn.shopify.com/s/files/1/0311/4398/5197/files/AOT-Website-App-05-11-21-LLSK-Website-Home-Banner_1600x.jpg?v=1621010590"
@@ -110,7 +102,7 @@ function index() {
         </div>
         <div className="custom-content">
           <div className="contentBox">
-            <p style={{ width: "85%", fontSize: "3.3vw" }}>
+            <p style={{ width: "85%", fontSize: "3.3vw", color: "black" }}>
               Hand blended and custom crafted fine organic teas <br /> and
               botanicals
             </p>

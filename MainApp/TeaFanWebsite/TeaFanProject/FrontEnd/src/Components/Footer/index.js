@@ -75,10 +75,12 @@ function index() {
                 <li>8:30am—4:30pm PST</li>
               </ul>
               <div className="footer-icons">
-                <i class="fab fa-facebook-square"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-tiktok"></i>
+                <ul>
+                  <i className="fab fa-facebook-square"></i>
+                  <i className="fab fa-instagram"></i>
+                  <i className="fab fa-twitter"></i>
+                  <i className="fab fa-tiktok"></i>
+                </ul>
               </div>
             </div>
           </Col>

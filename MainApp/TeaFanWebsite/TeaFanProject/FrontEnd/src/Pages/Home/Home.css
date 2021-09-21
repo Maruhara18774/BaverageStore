@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&display=swap");
 .home-container {
   margin-top: 5%;
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
 }
 .main-carousel {
   width: 100%;
@@ -19,11 +22,13 @@
   height: 100vh;
 }
 .carousel-title {
+  font-family: "Cormorant", serif;
   position: absolute;
   left: 60%;
   top: 30%;
   width: 90%;
   z-index: 2;
+  font-size: 1.2vw;
 }
 .carousel-title h1 {
   color: #00c4b2;
@@ -34,6 +39,7 @@
   background-color: transparent !important;
   color: #00c4b2;
   width: 12%;
+  font-size: 1vw;
 }
 .favorite {
   display: flex;
@@ -80,6 +86,7 @@
   flex-direction: column;
   justify-content: space-around;
   width: 80%;
+  font-family: "Josefin Slab", serif;
 }
 .custombtn {
   width: 20%;
