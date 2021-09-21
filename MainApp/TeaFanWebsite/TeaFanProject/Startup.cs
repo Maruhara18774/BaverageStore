@@ -15,6 +15,7 @@ using TeaFanProject.Entities;
 using TeaFanProject.Infrastructures.Identity;
 using TeaFanProject.Application.Interfaces;
 using TeaFanProject.Application.Services;
+using System.Threading.Tasks;
 
 namespace TeaFanProject
 {
@@ -54,6 +55,21 @@ namespace TeaFanProject
                 options.Password.RequireUppercase = false;
                 options.Lockout.AllowedForNewUsers = false;
             });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Events.OnRedirectToLogin = (context) =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
+
+                options.Events.OnRedirectToAccessDenied = (context) =>
+                {
+                    context.Response.StatusCode = 403;
+                    return Task.CompletedTask;
+                };
+            });
+
 
             services.AddTransient<SignInManager<User>, SignInManager<User>>();
             services.AddTransient<UserManager<User>, UserManager<User>>();

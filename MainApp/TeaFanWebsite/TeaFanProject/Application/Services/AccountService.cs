@@ -28,18 +28,20 @@ namespace TeaFanProject.Application.Services
             _currentUser = currentUser;
         }
 
-        public async Task<UserModal> GetProfieAsync()
+        public async Task<ProfieModal> GetProfieAsync()
         {
             var user = await _userManager.FindByIdAsync(_currentUser.UserId.ToString());
             if (user!= null)
             {
-                return new UserModal()
+                return new ProfieModal()
                 {
                     Id = user.Id,
                     Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    Type = (await _userManager.GetRolesAsync(user))[0]
+                    Type = (await _userManager.GetRolesAsync(user))[0],
+                    PhoneNumber = user.PhoneNumber,
+                    Address = user.Address
                 };
             }
             return null;
@@ -88,6 +90,45 @@ namespace TeaFanProject.Application.Services
                 });
             }
             return result;
+        }
+
+        public async Task<UserModal> EditProfieAsync(EditRequest request)
+        {
+            var user = _context.Users.Where(x => x.Id == _currentUser.UserId).FirstOrDefault();
+            if (user == null)
+            {
+                return null;
+            }
+            user.FirstName = request.FirstName;
+            user.LastName = request.LastName;
+            user.Address = request.Address;
+            user.PhoneNumber = request.PhoneNumber;
+            await _context.SaveChangesAsync();
+            return new UserModal()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Type = (await _userManager.GetRolesAsync(user))[0]
+            };
+        }
+
+        public async Task<bool> ChangePasswordAsync(ChangePasswordRequest request)
+        {
+            var user = _context.Users.Where(x => x.Id == _currentUser.UserId).FirstOrDefault();
+            var hasher = new PasswordHasher<User>();
+            var verificationResult = hasher.VerifyHashedPassword(user, user.PasswordHash, request.OldPass);
+            if(verificationResult.ToString() != "Success")
+            {
+                return false;
+            }
+            var result = await _userManager.ChangePasswordAsync(user, request.OldPass, request.NewPass);
+            if (result.Succeeded)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

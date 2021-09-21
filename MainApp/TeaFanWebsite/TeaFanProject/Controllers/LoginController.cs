@@ -13,7 +13,6 @@ namespace TeaFanProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class LoginController : Controller
     {
         private readonly SignInManager<User> _signInManager;
@@ -25,17 +24,27 @@ namespace TeaFanProject.Controllers
         }
         [AllowAnonymous]
         [HttpPost("Login")]
-        public async Task<TFResult<UserModal>> Login(LoginRequest request)
+        public async Task<IActionResult> Login(LoginRequest request)
         {
+            if(request.Email == null || request.Password == null || request.Email == "" || request.Password == "")
+            {
+                var content = new TFResult<UserModal>()
+                {
+                    Code = 400,
+                    Message = "Have null parameter"
+                };
+                return BadRequest(content);
+            }
             var user = await _signInManager.UserManager.FindByEmailAsync(request.Email);
             if(user == null || user.DeletedDate != null)
             {
-                return new TFResult<UserModal>()
+                var content =  new TFResult<UserModal>()
                 {
                     Code = 404,
                     Message = "User not found",
                     Data = null
                 };
+                return BadRequest(content);
             }
             var signInResult = await _signInManager.PasswordSignInAsync(request.Email, request.Password, request.RememberMe, false);
             if (signInResult.Succeeded)
@@ -48,45 +57,58 @@ namespace TeaFanProject.Controllers
                     LastName = user.LastName,
                     Type = (await _signInManager.UserManager.GetRolesAsync(user))[0]
                 };
-                return new TFResult<UserModal>()
+                var content =  new TFResult<UserModal>()
                 {
                     Code = 200,
                     Message = "Login success",
                     Data = userModal
                 };
+                return Ok(content);
             }
             else
             {
-                return new TFResult<UserModal>()
+                var content =  new TFResult<UserModal>()
                 {
                     Code = 401,
                     Message = "Password is incorrect",
                     Data = null
                 };
+                return BadRequest(content);
             }
         }
         [HttpGet("Logout")]
-        public async Task<TFResult<bool>> Logout()
+        public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            return new TFResult<bool>()
+            if (User.Identity.IsAuthenticated)
             {
-                Code = 200,
-                Message = "Logout success"
+                await _signInManager.SignOutAsync();
+                var content = new TFResult<bool>()
+                {
+                    Code = 200,
+                    Message = "Logout success"
+                };
+                return Ok(content);
+            }
+            var content2 = new TFResult<bool>()
+            {
+                Code = 401,
+                Message = "Did not login before"
             };
+            return BadRequest(content2);
         }
         [AllowAnonymous]
         [HttpPost("Regist")]
-        public async Task<TFResult<UserModal>> Register(RegistRequest request)
+        public async Task<IActionResult> Register(RegistRequest request)
         {
             var checkEmail = await _userManager.FindByEmailAsync(request.Email);
             if(checkEmail!= null)
             {
-                return new TFResult<UserModal>()
+                var content1 =  new TFResult<UserModal>()
                 {
                     Code = 402,
                     Message = "This email was used"
                 };
+                return BadRequest(content1);
             }
             var user = new User()
             {
@@ -112,19 +134,21 @@ namespace TeaFanProject.Controllers
                         LastName = user.LastName,
                         Type = (await _signInManager.UserManager.GetRolesAsync(user))[0]
                     };
-                    return new TFResult<UserModal>()
+                    var content2 =  new TFResult<UserModal>()
                     {
                         Code = 200,
                         Message = "Login success",
                         Data = userModal
                     };
+                    return Ok(content2);
                 }
             }
-            return new TFResult<UserModal>()
+            var content =  new TFResult<UserModal>()
             {
                 Code = 403,
                 Message = "Failed regist"
             };
+            return BadRequest(content);
         }
     }
 }

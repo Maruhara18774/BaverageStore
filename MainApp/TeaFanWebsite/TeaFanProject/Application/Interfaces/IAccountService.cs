@@ -9,8 +9,10 @@ namespace TeaFanProject.Application.Interfaces
 {
     public interface IAccountService
     {
-        Task<UserModal> GetProfieAsync();
+        Task<ProfieModal> GetProfieAsync();
         Task<List<OrderModal>> GetHistoryAsync();
         Task<OrderModal> GetHistoryExpandAsync(int cartID);
+        Task<UserModal> EditProfieAsync(EditRequest request);
+        Task<bool> ChangePasswordAsync(ChangePasswordRequest request);
     }
 }
