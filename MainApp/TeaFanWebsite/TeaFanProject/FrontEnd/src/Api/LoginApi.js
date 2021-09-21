@@ -1,7 +1,7 @@
 import API from "./API.js";
-import axios from "axios";
+// import axios from "axios";
 import { API_URL } from "../ConfigApi.js";
-import { message } from "antd";
+// import { message } from "antd";
 
 const LoginApi = {
   login: async (request) => {

@@ -24,12 +24,12 @@ function index() {
         </div>
         <div className="icons-list">
           <li>
-            <a href="">
+            <a href="/favorite">
               <HeartOutlined />
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/search">
               <SearchOutlined />
             </a>
           </li>
@@ -39,7 +39,7 @@ function index() {
             </Link>
           </li>
           <li>
-            <a href="">
+            <a href="/cart">
               <ShoppingCartOutlined />
             </a>
           </li>

@@ -1,13 +1,7 @@
 import React from "react";
-import {
-  Redirect,
-  Route,
-  Switch,
-  useLocation,
-  useHistory,
-} from "react-router-dom";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
 import Nav from "./Components/Nav";
-import Footer from "./Components/Footer";
+
 // core components
 import routes from "./routes.js";
 import { Container, Col } from "reactstrap";
@@ -15,7 +9,6 @@ import { Container, Col } from "reactstrap";
 function App() {
   const mainContent = React.useRef(null);
   const location = useLocation();
-  const history = useHistory();
 
   // username in header
   var user = localStorage.getItem("user");
