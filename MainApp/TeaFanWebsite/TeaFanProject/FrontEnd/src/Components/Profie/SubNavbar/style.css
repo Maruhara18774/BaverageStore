@@ -1,0 +1,20 @@
+.profieMenu{
+    font-size: large;
+}
+.profieMenu ul{
+    list-style: none;
+}
+.profieMenu ul li{
+    display: inline;
+}
+.profieMenu .right{
+    float: right;
+    margin-left: 10px;
+}
+.profieMenu .logout{
+    color: red;
+}
+.profieMenu .right:hover{
+    cursor: pointer;
+    color: gainsboro;
+}

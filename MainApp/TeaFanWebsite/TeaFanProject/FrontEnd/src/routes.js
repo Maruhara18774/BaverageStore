@@ -1,6 +1,7 @@
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import Profie from "./Pages/Profie";
 
 var routes = [
   {
@@ -24,5 +25,13 @@ var routes = [
     component: Register,
     isSideBar: true,
   },
+  {
+    path: "/profie",
+    name: "Profie",
+    icon: "fas fa-home",
+    component: Profie,
+    isSideBar: true,
+  },
+
 ];
 export default routes;

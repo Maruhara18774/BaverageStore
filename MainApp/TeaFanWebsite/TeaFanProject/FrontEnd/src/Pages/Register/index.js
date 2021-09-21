@@ -12,7 +12,7 @@ function RegistForm(props) {
   const [errorMessage,setErrorMessage] = useState("");
 
   const onFinish = async (values) => {
-    if(values.password != values.confirmPassword){
+    if(values.password !== values.confirmPassword){
       setErrorMessage("Wrong confirm password");
     }
     else{
@@ -23,7 +23,7 @@ function RegistForm(props) {
         "password": values.password
       }
       var result = await LoginApi.regist(request);
-      if(result.code != 200){
+      if(result.code !== 200){
         setErrorMessage(result.message)
       }
       else{
@@ -128,7 +128,7 @@ function RegistForm(props) {
                 placeholder="Confirm password"
               />
             </Form.Item>
-            {errorMessage!=""?<p>{errorMessage}</p>:<></>}
+            {errorMessage!==""?<p>{errorMessage}</p>:<></>}
             <Button className="submit-btn" type="primary" htmlType="submit">
               Sign Up
             </Button>

@@ -14,7 +14,7 @@ function Login(props) {
     e["rememberMe"] = false;
     await LoginApi.login(e)
       .then((data) => {
-        if(data.code != 200){
+        if(data.code !== 200){
           setErrorMessage(data.message);
         }
         else{
@@ -73,7 +73,7 @@ function Login(props) {
                 placeholder="Password"
               />
             </Form.Item>
-            {errorMessage!=""?<p>{errorMessage}</p>:<></>}
+            {errorMessage!==""?<p>{errorMessage}</p>:<></>}
             <Button className="submit-btn" type="primary" htmlType="submit">
               Login
             </Button>

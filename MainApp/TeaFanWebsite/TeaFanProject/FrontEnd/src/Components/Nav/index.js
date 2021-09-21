@@ -34,9 +34,14 @@ function index() {
             </a>
           </li>
           <li>
-            <Link to="/login">
-              <UserOutlined />
-            </Link>
+            {localStorage.getItem("user") == null ?
+              <Link to="/login">
+                <UserOutlined />
+              </Link> :
+              <Link to="/profie">
+                <UserOutlined />
+              </Link>
+            }
           </li>
           <li>
             <a href="/cart">
