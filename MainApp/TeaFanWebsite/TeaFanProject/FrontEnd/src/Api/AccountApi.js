@@ -21,6 +21,20 @@ const AccountApi = {
       //alert(error);
       console.error(error);
     }
+  },
+  changePassword: async (request) =>{
+    try{
+      const url = baseURL +"/ChangePassword";
+      var result = await API.post(url,request);
+      return result;
+    }catch(err){console.log(err);}
+  },
+  editProfie: async (request) =>{
+    try{
+      const url = baseURL+"/Edit";
+      var result = await API.post(url,request);
+      return result;
+    } catch(err){console.log(err)}
   }
 };
 export default AccountApi;
