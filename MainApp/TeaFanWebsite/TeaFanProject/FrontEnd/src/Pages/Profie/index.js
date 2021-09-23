@@ -13,12 +13,16 @@ export class Profie extends Component {
             errorMessage: ""
         }
     }
-    async componentDidMount(){
+    async componentDidMount() {
         var result = await AccountApi.profie();
-        this.setState({user: result.data})
+        this.setState({ user: result.data })
     }
-    changePosition(position){
-        this.setState({position: position})
+    async changePosition(position){
+        this.setState({position: position});
+        if(position === "detail"){
+            var result = await AccountApi.profie();
+            this.setState({user: result.data})
+        }
     }
     async changePassword(val){
         if(val.newPass!== val.comfirmedPass){
@@ -44,7 +48,7 @@ export class Profie extends Component {
             this.setState({errorMessage:result.message})
         }
         else{
-            localStorage.setItem(user,result.data);
+            localStorage.setItem("user",JSON.stringify(result.data));
             alert("Profie was edited.");
         }
     }
@@ -78,17 +82,19 @@ export class Profie extends Component {
                             <Button 
                             shape="round" 
                             style={{marginRight:"20px"}} 
-                            onClick={this.setState({position:"changePassword"})}>
+                            onClick={()=>this.setState({position:"changePassword"})}>
                                 Change Password</Button>
                             <Button shape="round" 
-                            onClick={this.setState({position:"edit"})}>
+                            onClick={()=> this.setState({position:"edit"})}>
                                 Edit Details</Button>
                         </div>
                 )
+                break;
             case "history":
                 return(<div className="profie-content">
                 History
                 </div>)
+                break;
             case "changePassword":
                 return(<div className="profie-content">
                     <Form
@@ -109,7 +115,7 @@ export class Profie extends Component {
                             },
                           ]}
                         >
-                        <Input placeholder="Old password"/>
+                        <Input placeholder="Old password" type="password"/>
                         </Form.Item>
 
                         <Form.Item 
@@ -121,7 +127,7 @@ export class Profie extends Component {
                             },
                           ]}
                         >
-                        <Input placeholder="New password"/>
+                        <Input placeholder="New password" type="password"/>
                         </Form.Item>
 
                         <Form.Item 
@@ -133,13 +139,21 @@ export class Profie extends Component {
                             },
                           ]}
                         >
-                        <Input placeholder="Confirm password"/>
+                        <Input placeholder="Confirm password" type="password"/>
                         </Form.Item>
                         <p>{this.state.errorMessage}</p>
                         <Button type="primary" htmlType="submit">Save</Button>
+                        <Button type="secondary" onClick={()=>this.changePosition("detail")}>Back</Button>
                     </Form>
                 </div>)
+                break;
             case "edit":
+                var initVal = {
+                    firstName: this.state.user.firstName,
+                    lastName: this.state.user.lastName,
+                    phoneNumber:this.state.user.phoneNumber,
+                    address:this.state.user.address
+                }
                 return(<div className="profie-content">
                 <Form
                     labelCol={{
@@ -149,56 +163,36 @@ export class Profie extends Component {
                         span: 24,
                       }}
                       onFinish={this.editProfie}
+                      initialValues = {initVal}
                       >
                           <Form.Item
                           name="firstName"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your first name!",
-                            },
-                          ]}
                           >
                               <Input placeholder="First name" defaultValue={this.state.user.firstName}/>
                           </Form.Item>
 
                           <Form.Item
                           name="lastName"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your last name!",
-                            },
-                          ]}
                           >
                               <Input placeholder="Last name" defaultValue={this.state.user.lastName}/>
                           </Form.Item>
 
                           <Form.Item
                           name="phoneNumber"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your phone number!",
-                            },
-                          ]}
                           >
                               <Input placeholder="Phone number" defaultValue={this.state.user.phoneNumber}/>
                           </Form.Item>
 
                           <Form.Item
                           name="address"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Please input your address!",
-                            },
-                          ]}
                           >
                               <Input placeholder="address" defaultValue={this.state.user.address}/>
                           </Form.Item>
+                          <Button type="primary" htmlType="submit">Save</Button>
+                          <Button type="secondary" onClick={()=>this.changePosition("detail")}>Back</Button>
                       </Form>
                 </div>)
+                break;
             default:
                 break;
         }
