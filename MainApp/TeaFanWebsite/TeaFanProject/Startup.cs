@@ -12,6 +12,10 @@ using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Identity;
 using TeaFanProject.Entities;
+using TeaFanProject.Infrastructures.Identity;
+using TeaFanProject.Application.Interfaces;
+using TeaFanProject.Application.Services;
+using System.Threading.Tasks;
 
 namespace TeaFanProject
 {
@@ -44,10 +48,35 @@ namespace TeaFanProject
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.Configure<IdentityOptions>(options =>
             {
+                // Default Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Lockout.AllowedForNewUsers = false;
+            });
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Events.OnRedirectToLogin = (context) =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
 
+                options.Events.OnRedirectToAccessDenied = (context) =>
+                {
+                    context.Response.StatusCode = 403;
+                    return Task.CompletedTask;
+                };
             });
 
+
             services.AddTransient<SignInManager<User>, SignInManager<User>>();
+            services.AddTransient<UserManager<User>, UserManager<User>>();
+            services.AddTransient<ICurrentUser, CurrentUser>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<IProductService, ProductService>();
 
             services.AddSpaStaticFiles(configuration =>
             {

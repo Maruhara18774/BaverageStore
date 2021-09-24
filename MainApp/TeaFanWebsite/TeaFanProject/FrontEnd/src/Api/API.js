@@ -1,8 +1,6 @@
 import axios from "axios";
 import queryString from "query-string";
 
-const userEndpoint = "./api/Users";
-
 const API = axios.create({
   timeout: 300000,
   headers: {
@@ -34,11 +32,7 @@ API.interceptors.response.use(
       console.error(error);
       return Promise.reject(error);
     }
-  },
+  }
 );
 
 export default API;
-
-export function get(body) {
-  return axios.get(userEndpoint, body);
-}

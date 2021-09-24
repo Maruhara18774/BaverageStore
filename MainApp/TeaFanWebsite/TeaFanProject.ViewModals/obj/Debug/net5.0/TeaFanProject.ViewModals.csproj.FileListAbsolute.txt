@@ -10,3 +10,15 @@ D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj
 D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.dll
 D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\ref\TeaFanProject.ViewModals.dll
 D:\Univer\4-HK1\Project\MTKPM\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.pdb
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.dll
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\ref\TeaFanProject.ViewModals.dll
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.pdb
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\bin\Debug\net5.0\TeaFanProject.ViewModals.deps.json
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\bin\Debug\net5.0\TeaFanProject.ViewModals.dll
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\bin\Debug\net5.0\ref\TeaFanProject.ViewModals.dll
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\bin\Debug\net5.0\TeaFanProject.ViewModals.pdb
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.csprojAssemblyReference.cache
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.GeneratedMSBuildEditorConfig.editorconfig
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.AssemblyInfoInputs.cache
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.AssemblyInfo.cs
+D:\BaverageStore\MainApp\TeaFanWebsite\TeaFanProject.ViewModals\obj\Debug\net5.0\TeaFanProject.ViewModals.csproj.CoreCompileInputs.cache
