@@ -88,7 +88,7 @@ export class Nav extends Component {
             <Link to={()=> "/shop/" + this.GetCateID("Teaware")}>Teaware</Link>
           </li>
           <li>
-            <Link to={()=> "/shop/" + this.GetCateID("Gift")}>Featured</Link>
+            <Link to={()=> "/shop/" + this.GetCateID("Gift")}>Gift</Link>
           </li>
           <li>
             <Link to="/sale">Sale</Link>
