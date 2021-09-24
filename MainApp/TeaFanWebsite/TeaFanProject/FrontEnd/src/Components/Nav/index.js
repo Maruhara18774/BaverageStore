@@ -7,7 +7,15 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "./style.css";
-function index() {
+import HomeApi from "../../Api/HomeApi";
+function Nav() {
+  var category = await HomeApi.getCategories();
+  function GetCateID(name){
+    category.data.forEach(item => {
+      if(item.categoryName === name) return item.categoryID
+    });
+    return 0;
+  }
   return (
     <div className="navbar">
       <div className="nav-header">
@@ -56,16 +64,16 @@ function index() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/featured">Featured</Link>
+            <Link to={()=> "/shop/"+ GetCateID("Tea")}>Shop</Link>
           </li>
           <li>
-            <Link to="/shop">Shop</Link>
+            <Link to={()=> "/shop/" + GetCateID("Packaged")}>Collections</Link>
           </li>
           <li>
-            <Link to="/collections">Collections</Link>
+            <Link to={()=> "/shop/" + GetCateID("Teaware")}>Teaware</Link>
           </li>
           <li>
-            <Link to="/teaware">Teaware</Link>
+            <Link to={()=> "/shop/" + GetCateID("Gift")}>Featured</Link>
           </li>
           <li>
             <Link to="/sale">Sale</Link>
@@ -79,4 +87,4 @@ function index() {
   );
 }
 
-export default index;
+export default Nav;

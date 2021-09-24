@@ -2,6 +2,7 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Profie from "./Pages/Profie";
+import CateShop from "./Pages/Category";
 
 var routes = [
   {
@@ -32,6 +33,12 @@ var routes = [
     component: Profie,
     isSideBar: true,
   },
-
+  {
+    path: "/shop/:id",
+    name: "Shop",
+    icon: "fas fa-home",
+    component: CateShop,
+    isSideBar: true,
+  },
 ];
 export default routes;
