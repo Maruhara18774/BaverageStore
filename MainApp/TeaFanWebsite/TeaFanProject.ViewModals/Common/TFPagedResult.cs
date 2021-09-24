@@ -19,8 +19,7 @@ namespace TeaFanProject.ViewModals.Common
         {
             get
             {
-                var pageCount = (double)TotalRecords / Limit;
-                return (int)Math.Ceiling(pageCount);
+                return Items.Count;
             }
         }
     }

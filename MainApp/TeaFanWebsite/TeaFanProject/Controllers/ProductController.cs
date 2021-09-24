@@ -18,7 +18,7 @@ namespace TeaFanProject.Controllers
         {
             _service = service;
         }
-        [HttpGet("List")]
+        [HttpPost("List")]
         public async Task<IActionResult> GetListProductAsync(ProductRequest request)
         {
             var result = await _service.GetListProductAsync(request);

@@ -42,7 +42,7 @@ namespace TeaFanProject.Application.Services
             {
                 data = data.Where(x => x.Origin == request.Origin);
             }
-            if(request.Min<request.Max && request.Min > 0)
+            if(request.Min<request.Max && request.Min >= 0)
             {
                 data = data.Where(x => x.SalePrice >= request.Min && x.SalePrice <= request.Max);
             }
@@ -58,9 +58,10 @@ namespace TeaFanProject.Application.Services
                                   FlavorID = f.FlavorID,
                                   FlavorName = f.FlavorName
                               }).AsSplitQuery();
+                int count = flavor.ToList().Count;
                 if(request.FlavorsID.Count != 0)
                 {
-                    if(CheckContain(request.FlavorsID, await flavor.ToListAsync()))
+                    if(count != 0 && CheckContain(request.FlavorsID, await flavor.ToListAsync()))
                     {
                         result.Add(new ProductRespond()
                         {
@@ -73,39 +74,53 @@ namespace TeaFanProject.Application.Services
                         });
                     }
                 }
+                else
+                {
+                    result.Add(new ProductRespond()
+                    {
+                        ProductID = item.ProductID,
+                        ProductName = item.ProductName,
+                        Price = item.Price,
+                        SalePrice = item.SalePrice,
+                        Flavors = await flavor.Select(x => x.FlavorName).ToListAsync(),
+                        Images = await _context.ProductImages.Where(x => x.ProductID == item.ProductID).Select(x => x.ImageLink).ToListAsync()
+                    });
+                }
             }
+            var page = request.Page > 0 ? request.Page : 1;
+            var endData = result.Skip((page - 1) * 12).Take(12).ToList();
             switch (request.SortBy)
             {
                 case "Name":
-                    if(request.SortBy == "Desc")
+                    if(request.SortType == "Desc")
                     {
-                        result.OrderByDescending(x => x.ProductName);
+                        endData =  endData.OrderByDescending(x => x.ProductName).ToList();
                     }
                     else
                     {
-                        result.OrderBy(x => x.ProductName);
+                        endData = endData.OrderBy(x => x.ProductName).ToList();
                     }
                     break;
                 case "Price":
-                    if (request.SortBy == "Desc")
+                    if (request.SortType == "Desc")
                     {
-                        result.OrderByDescending(x => x.SalePrice);
+                        endData = endData.OrderByDescending(x => x.SalePrice).ToList();
                     }
                     else
                     {
-                        result.OrderBy(x => x.SalePrice);
+                        endData = endData.OrderBy(x => x.SalePrice).ToList();
                     }
                     break;
                 default:
                     break;
             }
-            var page = request.Page > 0 ? request.Page : 1;
+            
             var finalResult = new TFPagedResult<ProductRespond>()
             {
                 Page = page,
-                Limit = (int)result.Count / 12,
+                Limit = (int)result.Count / 12 + 1,
                 TotalRecords = result.Count,
-                Items = result.Skip((page - 1) * 12).Take(12).ToList()
+                Items = endData
             };
             return finalResult;
         }
@@ -113,8 +128,8 @@ namespace TeaFanProject.Application.Services
         {
             foreach(var item in arr1)
             {
-                var check = arr2.Where(x => x.FlavorID == item);
-                if (check == null) return false;
+                var check = arr2.Where(x => x.FlavorID == item).ToList();
+                if (check.Count == 0) return false;
             }
             return true;
         }
