@@ -1,4 +1,3 @@
-import React from "react";
 import {
   HeartOutlined,
   SearchOutlined,
@@ -8,16 +7,32 @@ import {
 import { Link } from "react-router-dom";
 import "./style.css";
 import HomeApi from "../../Api/HomeApi";
-function Nav() {
-  var category = await HomeApi.getCategories();
-  function GetCateID(name){
-    category.data.forEach(item => {
-      if(item.categoryName === name) return item.categoryID
-    });
-    return 0;
+import React, { Component } from 'react'
+
+export class Nav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+       categories: []
+    }
+    this.GetCategoriesID();
   }
-  return (
-    <div className="navbar">
+  
+  async GetCategoriesID(){
+    var categories = await HomeApi.getCategories();
+    this.setState({categories: categories.data})
+  }
+  GetCateID(name){
+    var target = -1;
+    this.state.categories.forEach(item => {
+      if(item.categoryName === name) target= item.categoryID
+    });
+    if(target === -1) target = 0;
+    return target;
+  }
+  render() {
+    return (
+      <div className="navbar">
       <div className="nav-header">
         <div className="logo-content">
           <img
@@ -64,16 +79,16 @@ function Nav() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to={()=> "/shop/"+ GetCateID("Tea")}>Shop</Link>
+            <Link to={()=> "/shop/"+ this.GetCateID("Tea")}>Shop</Link>
           </li>
           <li>
-            <Link to={()=> "/shop/" + GetCateID("Packaged")}>Collections</Link>
+            <Link to={()=> "/shop/" + this.GetCateID("Packaged")}>Collections</Link>
           </li>
           <li>
-            <Link to={()=> "/shop/" + GetCateID("Teaware")}>Teaware</Link>
+            <Link to={()=> "/shop/" + this.GetCateID("Teaware")}>Teaware</Link>
           </li>
           <li>
-            <Link to={()=> "/shop/" + GetCateID("Gift")}>Featured</Link>
+            <Link to={()=> "/shop/" + this.GetCateID("Gift")}>Featured</Link>
           </li>
           <li>
             <Link to="/sale">Sale</Link>
@@ -84,7 +99,8 @@ function Nav() {
         </ul>
       </div>
     </div>
-  );
+    )
+  }
 }
 
-export default Nav;
+export default Nav

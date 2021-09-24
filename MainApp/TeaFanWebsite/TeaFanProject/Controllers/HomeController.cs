@@ -35,15 +35,6 @@ namespace TeaFanProject.Controllers
         public async Task<IActionResult> GetListProductTypeByCateIDAsync(int id)
         {
             var result = await _homeService.GetListProductTypeByCateAsync(id);
-            if(result.Count == 0)
-            {
-                var nullExc = new TFResult<bool>()
-                {
-                    Code = 404,
-                    Message = "Wrong category ID"
-                };
-                return Ok(nullExc);
-            }
             var content = new TFResult<List<ProductTypeModal>>()
             {
                 Code = 200,
@@ -52,11 +43,11 @@ namespace TeaFanProject.Controllers
             };
             return Ok(content);
         }
-        [HttpGet("Brands")]
-        public async Task<IActionResult> GetListBrandAsync()
+        [HttpGet("Origins")]
+        public async Task<IActionResult> GetListOriginAsync()
         {
-            var result = await _homeService.GetListBrandAsync();
-            var content = new TFResult<List<BrandModal>>()
+            var result = await _homeService.GetListOriginAsync();
+            var content = new TFResult<List<string>>()
             {
                 Code = 200,
                 Message = "Success",
@@ -75,6 +66,18 @@ namespace TeaFanProject.Controllers
                 Data = result
             };
             return Ok(result);
+        }
+        [HttpGet("Category/{id}")]
+        public async Task<IActionResult> GetCategoryByIDAsync(int id)
+        {
+            var result = await _homeService.GetCategoryByID(id);
+            var content = new TFResult<Category>()
+            {
+                Code = 200,
+                Message = "Success",
+                Data = result
+            };
+            return Ok(content);
         }
     }
 }

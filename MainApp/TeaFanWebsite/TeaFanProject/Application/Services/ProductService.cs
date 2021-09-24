@@ -25,6 +25,8 @@ namespace TeaFanProject.Application.Services
         {
             var data = (from p in _context.Products
                         join b in _context.Brands on p.BrandID equals b.BrandID
+                        join t in _context.ProductTypes on p.TypeID equals t.TypeID
+                        where t.CategoryID == request.CategoryID
                         select new ProductModal()
                         {
                             ProductID = p.ProductID,

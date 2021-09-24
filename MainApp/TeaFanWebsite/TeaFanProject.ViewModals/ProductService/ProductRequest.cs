@@ -16,5 +16,6 @@ namespace TeaFanProject.ViewModals.ProductService
         public double Max { get; set; }
         public string SortBy { get; set; }
         public string SortType { get; set; }
+        public int CategoryID { get; set; }
     }
 }

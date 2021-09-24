@@ -173,22 +173,26 @@ namespace TeaFanProject.Data
                 new Category()
                 {
                     CategoryID = 4,
-                    CategoryName = "Tea"
+                    CategoryName = "Tea",
+                    IsTypeOfTea = true
                 },
                 new Category()
                 {
                     CategoryID = 1,
-                    CategoryName = "Packaged"
+                    CategoryName = "Packaged",
+                    IsTypeOfTea = true
                 },
                 new Category()
                 {
                     CategoryID = 2,
-                    CategoryName = "Teaware"
+                    CategoryName = "Teaware",
+                    IsTypeOfTea = false
                 },
                 new Category()
                 {
                     CategoryID = 3,
-                    CategoryName = "Gift"
+                    CategoryName = "Gift",
+                    IsTypeOfTea = true
                 }
                 );
 

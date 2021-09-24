@@ -39,16 +39,16 @@ namespace TeaFanProject.Application.Services
             return result;
         }
 
-        public async Task<List<BrandModal>> GetListBrandAsync()
+        public async Task<List<string>> GetListOriginAsync()
         {
-            var listBrand = from b in _context.Brands
-                            select b;
-            var result = await listBrand.Select(p => new BrandModal()
+            var listBrand = await (from b in _context.Brands
+                            select b).ToListAsync();
+            var result = new List<string>();
+            foreach(var item in listBrand)
             {
-                BrandID = p.BrandID,
-                BrandName = p.BrandName,
-                Origin = p.Origin
-            }).ToListAsync();
+                var check = result.Where(x => x == item.Origin).FirstOrDefault();
+                if (check == null) result.Add(item.Origin);
+            }
             return result;
         }
 
@@ -62,6 +62,12 @@ namespace TeaFanProject.Application.Services
                 FlavorName = p.FlavorName
             }).ToListAsync();
             return result;
+        }
+
+        public async Task<Category> GetCategoryByID(int id)
+        {
+            var cate = await _context.Categories.Where(x => x.CategoryID == id).FirstOrDefaultAsync();
+            return cate;
         }
     }
 }
