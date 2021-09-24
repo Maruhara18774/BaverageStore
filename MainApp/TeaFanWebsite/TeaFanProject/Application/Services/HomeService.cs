@@ -14,12 +14,10 @@ namespace TeaFanProject.Application.Services
     public class HomeService : IHomeService
     {
         private readonly ApplicationDbContext _context;
-        private readonly ICurrentUser _currentUser;
 
-        public HomeService(ApplicationDbContext context, ICurrentUser currentUser)
+        public HomeService(ApplicationDbContext context)
         {
             _context = context;
-            _currentUser = currentUser;
         }
 
         public async Task<List<Category>> GetListCategoryAsync()
@@ -54,5 +52,16 @@ namespace TeaFanProject.Application.Services
             return result;
         }
 
+        public async Task<List<FlavorModal>> GetListFlavorAsync()
+        {
+            var listFlavor = from f in _context.Flavors
+                             select f;
+            var result = await listFlavor.Select(p => new FlavorModal()
+            {
+                FlavorID = p.FlavorID,
+                FlavorName = p.FlavorName
+            }).ToListAsync();
+            return result;
+        }
     }
 }

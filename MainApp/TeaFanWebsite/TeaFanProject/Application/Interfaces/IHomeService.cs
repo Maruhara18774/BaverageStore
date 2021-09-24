@@ -12,5 +12,6 @@ namespace TeaFanProject.Application.Interfaces
         Task<List<Category>> GetListCategoryAsync();
         Task<List<ProductTypeModal>> GetListProductTypeByCateAsync(int categoryID);
         Task<List<BrandModal>> GetListBrandAsync();
+        Task<List<FlavorModal>> GetListFlavorAsync();
     }
 }

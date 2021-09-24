@@ -64,5 +64,17 @@ namespace TeaFanProject.Controllers
             };
             return Ok(result);
         }
+        [HttpGet("Flavors")]
+        public async Task<IActionResult> GetListFlavorAsync()
+        {
+            var result = await _homeService.GetListFlavorAsync();
+            var content = new TFResult<List<FlavorModal>>()
+            {
+                Code = 200,
+                Message = "Success",
+                Data = result
+            };
+            return Ok(result);
+        }
     }
 }
