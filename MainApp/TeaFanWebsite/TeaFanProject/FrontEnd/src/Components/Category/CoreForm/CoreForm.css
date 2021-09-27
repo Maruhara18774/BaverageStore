@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@500&display=swap");
+.cate-container {
+  margin-top: 7%;
+  height: 100%;
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.product-banner-box {
+  width: 100%;
+}
+.product-banner {
+  width: 100%;
+  object-fit: contain;
+}
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 20px;
+  border-bottom: 1.5px solid #707070;
+  margin: 2rem 0px 1rem 0px;
+}
+.product-list-box {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 2rem;
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.product-card p {
+  font-family: "Josefin Slab", serif;
+  font-weight: 600;
+  margin-bottom: 0px !important;
+}
+.product-img {
+  width: 100%;
+  object-fit: fill;
+}
+.product-price {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.product-price h3 {
+  text-decoration-line: line-through;
+  color: #afadad;
+  margin-bottom: 0px !important;
+}
+.product-price h2 {
+  color: #f1a89b;
+  font-weight: 600;
+  margin-bottom: 0px !important;
+}
+.addbtn {
+  width: 100%;
+  color: #707070;
+  border-radius: 11px !important;
+}
+.flavor-span {
+  color: #707070;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  font-size: 11px;
+  margin-top: 1.5px;
+}
+.pagination {
+  margin: 2rem 2rem 2rem 0;
+  float: right;
+}
+.title-product {
+  font-size: 1.4em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+.product-imgBox {
+  position: relative;
+  width: 100%;
+  padding: 0 !important;
+}
+.heart {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: pink;
+}

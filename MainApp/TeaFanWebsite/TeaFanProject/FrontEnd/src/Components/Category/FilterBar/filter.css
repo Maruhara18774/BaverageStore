@@ -1,0 +1,36 @@
+.layout-wrapper {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: 7%;
+}
+.sideBox {
+  padding-left: 24px !important;
+}
+.price-boxs {
+  padding-left: 24px !important;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0 12px 0;
+}
+
+.pricebtn {
+  width: 100%;
+  background-color: #b4b3b3;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.pricebtnwrapper {
+  width: 90%;
+  padding-left: 24px;
+  margin-top: 10px;
+}
+.ant-menu-sub.ant-menu-inline {
+  background-color: #fff !important;
+}
+.flavorBox {
+  display: flex !important;
+  flex-direction: column !important;
+  padding-left: 24px !important;
+}

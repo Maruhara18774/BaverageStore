@@ -8,20 +8,18 @@ import LoginApi from "../../Api/LoginApi";
 import { useHistory } from "react-router-dom";
 function Login(props) {
   const history = useHistory();
-  const [errorMessage,setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onFormSubmit = async (e) => {
     e["rememberMe"] = false;
-    await LoginApi.login(e)
-      .then((data) => {
-        if(data.code !== 200){
-          setErrorMessage(data.message);
-        }
-        else{
-          localStorage.setItem("user", JSON.stringify(data.data));
-          history.push("/home");
-        }
-      });
+    await LoginApi.login(e).then((data) => {
+      if (data.code !== 200) {
+        setErrorMessage(data.message);
+      } else {
+        localStorage.setItem("user", JSON.stringify(data.data));
+        history.push("/home");
+      }
+    });
   };
 
   return (
@@ -73,7 +71,7 @@ function Login(props) {
                 placeholder="Password"
               />
             </Form.Item>
-            {errorMessage!==""?<p>{errorMessage}</p>:<></>}
+            {errorMessage !== "" ? <p>{errorMessage}</p> : <></>}
             <Button className="submit-btn" type="primary" htmlType="submit">
               Login
             </Button>
@@ -84,10 +82,10 @@ function Login(props) {
             <hr />
           </div>
           <Button className="social-btn">
-            <i class="fab fa-google"></i>Login with Google
+            <i className="fab fa-google"></i>Login with Google
           </Button>
           <Button className="social-btn">
-            <i class="fab fa-facebook"></i> Login with Facebook
+            <i className="fab fa-facebook"></i> Login with Facebook
           </Button>
           <h5 style={{ color: "#B2B1B9", fontSize: "1.1vw" }}>
             Don't have account ?{" "}

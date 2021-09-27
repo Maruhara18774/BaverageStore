@@ -24,22 +24,30 @@
 .carousel-title {
   font-family: "Cormorant", serif;
   position: absolute;
-  left: 60%;
+  left: 50%;
   top: 30%;
-  width: 90%;
+  width: 30%;
+  height: 100%;
   z-index: 2;
   font-size: 1.2vw;
 }
 .carousel-title h1 {
   color: #00c4b2;
+  font-size: 3em;
+  margin-bottom: 0.1em;
+  line-height: 1.2em;
+}
+.carousel-title p {
+  font-size: 1.4em;
 }
 .shopbtn {
   border-radius: 36px !important;
   border: 1px solid #00c4b2 !important;
   background-color: transparent !important;
   color: #00c4b2;
-  width: 12%;
-  font-size: 1vw;
+  width: 35%;
+  font-size: 1em;
+  font-weight: 600;
 }
 .favorite {
   display: flex;
@@ -62,7 +70,7 @@
   align-items: center;
   flex-direction: column;
 }
-.shopfavorite h4 {
+.shopfavorite h2 {
   color: #f8a191;
   margin-top: 10px;
 }
@@ -95,7 +103,7 @@
   background-color: transparent;
   font-weight: 500;
   margin-top: -5%;
-  font-size: 1vw;
+  font-size: 1.2em;
 }
 .imgBox {
   width: 38%;
@@ -112,6 +120,6 @@
   padding: 20px;
   margin: 20px 0 20px 0;
 }
-.trending h2 {
+.trending h1 {
   text-align: center;
 }

@@ -9,24 +9,22 @@ import { useHistory } from "react-router-dom";
 
 function RegistForm(props) {
   const history = useHistory();
-  const [errorMessage,setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onFinish = async (values) => {
-    if(values.password !== values.confirmPassword){
+    if (values.password !== values.confirmPassword) {
       setErrorMessage("Wrong confirm password");
-    }
-    else{
+    } else {
       var request = {
-        "firstName": values.firstName,
-        "lastName": values.lastName,
-        "email": values.email,
-        "password": values.password
-      }
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        password: values.password,
+      };
       var result = await LoginApi.regist(request);
-      if(result.code !== 200){
-        setErrorMessage(result.message)
-      }
-      else{
+      if (result.code !== 200) {
+        setErrorMessage(result.message);
+      } else {
         localStorage.setItem("user", JSON.stringify(result.data));
         history.push("/home");
       }
@@ -128,7 +126,7 @@ function RegistForm(props) {
                 placeholder="Confirm password"
               />
             </Form.Item>
-            {errorMessage!==""?<p>{errorMessage}</p>:<></>}
+            {errorMessage !== "" ? <p>{errorMessage}</p> : <></>}
             <Button className="submit-btn" type="primary" htmlType="submit">
               Sign Up
             </Button>
@@ -140,10 +138,10 @@ function RegistForm(props) {
           </div>
           <div className="social-group-btn">
             <Button className="social-btn" style={{ width: "45%" }}>
-              <i class="fab fa-google"></i>Login with Google
+              <i className="fab fa-google"></i>Login with Google
             </Button>
             <Button className="social-btn" style={{ width: "45%" }}>
-              <i class="fab fa-facebook"></i> Login with Facebook
+              <i className="fab fa-facebook"></i> Login with Facebook
             </Button>
           </div>
           <h5 style={{ color: "#B2B1B9", fontSize: "1.1vw" }}>

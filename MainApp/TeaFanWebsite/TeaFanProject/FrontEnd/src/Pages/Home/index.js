@@ -51,7 +51,7 @@ function index() {
           </div>
         </div>
       </Carousel>
-      <h2
+      <h1
         style={{
           textAlign: "center",
           color: "#FEC5BB",
@@ -60,7 +60,7 @@ function index() {
         }}
       >
         Shop Tea Favorite
-      </h2>
+      </h1>
       <div className="favorite">
         <div className="shopfavorite">
           <div className="card-wrapper">
@@ -69,7 +69,7 @@ function index() {
               alt="shoptea"
             />
           </div>
-          <h4>SHOP TEAS</h4>
+          <h2>SHOP TEAS</h2>
         </div>
         <div className="shopfavorite">
           <div className="card-wrapper">
@@ -78,7 +78,7 @@ function index() {
               alt="shopcollection"
             />
           </div>
-          <h4>SHOP COLLECTIONS</h4>
+          <h2>SHOP COLLECTIONS</h2>
         </div>
         <div className="shopfavorite">
           <div className="card-wrapper">
@@ -87,11 +87,11 @@ function index() {
               alt="shopteaware"
             />
           </div>
-          <h4>SHOP TEAWARE</h4>
+          <h2>SHOP TEAWARE</h2>
         </div>
       </div>
       <div className="trending">
-        <h2>Trending</h2>
+        <h1>Trending</h1>
       </div>
       <div className="custom">
         <div className="imgBox">

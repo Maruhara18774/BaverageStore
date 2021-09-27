@@ -11,7 +11,7 @@ ReactDOM.render(
     <div>
       <Switch>
         <Route path="/" render={(props) => <App {...props} />} />
-        <Redirect from="/" to="/home/index" />
+        <Redirect from="/" to="home/index" />
       </Switch>
     </div>
   </BrowserRouter>,
