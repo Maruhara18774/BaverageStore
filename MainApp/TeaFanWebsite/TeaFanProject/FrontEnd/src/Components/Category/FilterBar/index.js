@@ -31,8 +31,8 @@ export class FilterBar extends Component {
       ...this.state.request,
       productTypeID: e.target.value,
     };
-    console.log(request);
     this.setState({ request: request });
+    this.filter();
   };
   onChangeOrigin = (e) => {
     var request = {
@@ -40,13 +40,13 @@ export class FilterBar extends Component {
       origin: e.target.value,
     };
     this.setState({ request: request });
+    this.filter()
   };
   onChangeMin = (e) => {
     var request = {
       ...this.state.request,
       min: e.target.value,
     };
-    console.log(request);
     this.setState({ request: request });
   };
   onChangeMax = (e) => {
@@ -54,12 +54,10 @@ export class FilterBar extends Component {
       ...this.state.request,
       max: e.target.value,
     };
-    console.log(request);
     this.setState({ request: request });
   };
 
   handleChange(value) {
-    console.log(`selected ${value}`);
   }
   async initial() {
     var cate = await HomeApi.getCategory(this.props.cateID);
@@ -109,7 +107,6 @@ export class FilterBar extends Component {
       ...this.state.request,
       flavorsID: e,
     };
-    console.log(request);
     this.setState({ request: request });
   };
 
