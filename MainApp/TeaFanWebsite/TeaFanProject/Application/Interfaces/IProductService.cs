@@ -10,5 +10,6 @@ namespace TeaFanProject.Application.Interfaces
     public interface IProductService
     {
         Task<TFPagedResult<ProductRespond>> GetListProductAsync(ProductRequest request);
+        Task<DetailModal> GetProductDetailAsync(int id);
     }
 }

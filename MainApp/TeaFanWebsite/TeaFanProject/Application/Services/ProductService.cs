@@ -126,6 +126,73 @@ namespace TeaFanProject.Application.Services
             };
             return finalResult;
         }
+
+        public async Task<DetailModal> GetProductDetailAsync(int id)
+        {
+            var product = await _context.Products.Where(x => x.ProductID == id).FirstOrDefaultAsync();
+            if (product == null) return null;
+            var result = new DetailModal()
+            {
+                ProductID = id,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                SalePrice = product.SalePrice,
+                TypeID = product.TypeID,
+                TypeName = await _context.ProductTypes.Where(x => x.TypeID == product.TypeID).Select(x => x.TypeName).FirstOrDefaultAsync(),
+                Description = product.Description,
+                Images = await _context.ProductImages.Where(x => x.ProductID == id).Select(x => x.ImageLink).ToListAsync()
+            };
+
+            var brand = await _context.Brands.Where(x => x.BrandID == product.BrandID).FirstOrDefaultAsync();
+            result.Brand = brand.BrandName;
+            result.Origin = brand.Origin;
+
+            var cateID = await _context.ProductTypes.Where(x => x.TypeID == product.TypeID).Select(x=>x.CategoryID).FirstOrDefaultAsync();
+            if(await _context.Categories.Where(x => x.CategoryID == cateID).Select(x => x.IsTypeOfTea).FirstOrDefaultAsync())
+            {
+                var flavor = (from f in _context.Flavors
+                              join tf in _context.ProductTeaFlavors on f.FlavorID equals tf.FlavorID
+                              join pt in _context.ProductTeas on tf.ProductTeaID equals pt.ProductTeaID
+                              where pt.ProductID == id
+                              select new FlavorModal()
+                              {
+                                  FlavorID = f.FlavorID,
+                                  FlavorName = f.FlavorName
+                              }).AsSplitQuery();
+                result.Flavors = await flavor.ToListAsync();
+                var tea = await _context.ProductTeas.Where(x => x.ProductID == id).FirstOrDefaultAsync();
+                result.Tea = new PTeaModal()
+                {
+                    WaterTemperature = tea.WaterTemperature,
+                    SteepTime = tea.SteepTime,
+                    ServingSize = tea.ServingSize,
+                    Ingredients = tea.Ingredients
+                };
+            }
+            else
+            {
+                var other = await _context.ProductOthers.Where(x => x.ProductID == id).FirstOrDefaultAsync();
+                result.Other = new POtherModal()
+                {
+                    Material = other.Material,
+                    Color = other.Color,
+                    CareInstruction = other.CareInstruction,
+                    Demensions = new List<DemensionModal>()
+                };
+                var demensionRefs = await _context.ProductOtherDemensions.Where(x => x.ProductOtherID == other.ProductOtherID).ToListAsync();
+                foreach(var item in demensionRefs)
+                {
+                    result.Other.Demensions.Add(new DemensionModal()
+                    {
+                        DemensionName = await _context.Demensions.Where(x => x.DemensionID == item.DemensionID).Select(x => x.DemensionName).FirstOrDefaultAsync(),
+                        Value = item.Value,
+                        Unit = item.Unit
+                    });
+                }
+            }
+            return result;
+        }
+
         private bool CheckContain(List<int> arr1, List<FlavorModal> arr2)
         {
             foreach(var item in arr1)

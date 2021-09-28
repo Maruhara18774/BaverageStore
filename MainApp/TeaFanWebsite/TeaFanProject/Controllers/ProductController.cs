@@ -30,5 +30,17 @@ namespace TeaFanProject.Controllers
             };
             return Ok(content);
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDetailProductAsync(int id)
+        {
+            var result = await _service.GetProductDetailAsync(id);
+            var content = new TFResult<DetailModal>()
+            {
+                Code = (result != null ? 200 : 404),
+                Message = (result != null ? "Success" : "Failed"),
+                Data = result
+            };
+            return Ok(content);
+        }
     }
 }
