@@ -26,7 +26,8 @@ namespace TeaFanProject.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginRequest request)
         {
-            if(request.Email == null || request.Password == null || request.Email == "" || request.Password == "")
+            if(String.IsNullOrWhiteSpace(request.Email)||
+                String.IsNullOrWhiteSpace(request.Password))
             {
                 var content = new TFResult<UserModal>()
                 {
@@ -100,6 +101,18 @@ namespace TeaFanProject.Controllers
         [HttpPost("Regist")]
         public async Task<IActionResult> Register(RegistRequest request)
         {
+            if(String.IsNullOrWhiteSpace(request.FirstName)||
+                String.IsNullOrWhiteSpace(request.LastName)||
+                String.IsNullOrWhiteSpace(request.Email)||
+                String.IsNullOrWhiteSpace(request.Password))
+            {
+                return Ok(new TFResult<bool>()
+                {
+                    Code = 400,
+                    Message = "Parameters can not null",
+                    Data = false
+                });
+            }
             var checkEmail = await _userManager.FindByEmailAsync(request.Email);
             if(checkEmail!= null)
             {

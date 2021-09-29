@@ -10,5 +10,6 @@ namespace TeaFanProject.Application.Interfaces
     public interface IFeedbackService
     {
         Task<TFPagedResult<FeedbackModal>> GetListFeedbackAsync(GetFeedbacksRequest request);
+        Task<bool> CreateFeedbackAsync(CreateFeedbackRequest request);
     }
 }

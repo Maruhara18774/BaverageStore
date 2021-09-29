@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeaFanProject.Application.Interfaces;
 using TeaFanProject.Data;
+using TeaFanProject.Entities;
+using TeaFanProject.Infrastructures.Identity;
 using TeaFanProject.ViewModals.Common;
 using TeaFanProject.ViewModals.FeedbackService;
 
@@ -13,10 +15,12 @@ namespace TeaFanProject.Application.Services
     public class FeedbackService : IFeedbackService
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICurrentUser _currentUser;
 
-        public FeedbackService(ApplicationDbContext context)
+        public FeedbackService(ApplicationDbContext context, ICurrentUser currentUser)
         {
             _context = context;
+            _currentUser = currentUser;
         }
 
         public async Task<TFPagedResult<FeedbackModal>> GetListFeedbackAsync(GetFeedbacksRequest request)
@@ -43,6 +47,20 @@ namespace TeaFanProject.Application.Services
                 TotalRecords = feedback.Count,
                 Items = endData
             };
+        }
+        public async Task<bool> CreateFeedbackAsync(CreateFeedbackRequest request)
+        {
+            _context.Ratings.Add(new Rating()
+            {
+                UserID = _currentUser.UserId,
+                ProductID = request.ProductID,
+                CreatedDate = DateTime.Now,
+                StarCount = request.StarCount,
+                Title = request.Title,
+                Content = request.Content
+            });
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

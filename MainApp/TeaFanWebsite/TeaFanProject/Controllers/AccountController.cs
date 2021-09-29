@@ -58,6 +58,15 @@ namespace TeaFanProject.Controllers
         public async Task<IActionResult> GetHistoryExpandAsync(int id)
         {
             var result = await _accountService.GetHistoryExpandAsync(id);
+            if(result == null)
+            {
+                return Ok(new TFResult<OrderModal>()
+                {
+                    Code = 404,
+                    Message = "Expand not found",
+                    Data = null
+                });
+            }
             var content = new TFResult<OrderModal>()
             {
                 Code = 200,
@@ -69,6 +78,18 @@ namespace TeaFanProject.Controllers
         [HttpPost("Edit")]
         public async Task<IActionResult> EditProfieAsync(EditRequest request)
         {
+            if(String.IsNullOrWhiteSpace(request.FirstName)||
+                String.IsNullOrWhiteSpace(request.LastName)||
+                String.IsNullOrWhiteSpace(request.PhoneNumber)||
+                String.IsNullOrWhiteSpace(request.Address))
+            {
+                return Ok(new TFResult<UserModal>()
+                {
+                    Code = 400,
+                    Message = "Parameters can not null",
+                    Data = null
+                });
+            }
             var result = await _accountService.EditProfieAsync(request);
             if(result != null)
             {
@@ -88,6 +109,16 @@ namespace TeaFanProject.Controllers
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePasswordAsync(ChangePasswordRequest request)
         {
+            if (String.IsNullOrWhiteSpace(request.OldPass) ||
+                String.IsNullOrWhiteSpace(request.NewPass))
+            {
+                return Ok(new TFResult<UserModal>()
+                {
+                    Code = 400,
+                    Message = "Parameters can not null",
+                    Data = null
+                });
+            }
             var result = await _accountService.ChangePasswordAsync(request);
             if (result)
             {
