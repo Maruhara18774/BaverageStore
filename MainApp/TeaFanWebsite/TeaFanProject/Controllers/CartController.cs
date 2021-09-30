@@ -96,5 +96,45 @@ namespace TeaFanProject.Controllers
             });
         }
 
+        [HttpGet("Checkout")]
+        public async Task<IActionResult> GetCheckoutInforAsync()
+        {
+            var result = await _service.GetCheckoutAsync();
+            if(result == null)
+            {
+                return Ok(new TFResult<CartModal>()
+                {
+                    Code = 400,
+                    Message = "Empty cart",
+                    Data = null
+                });
+            }
+            return Ok(new TFResult<CartModal>()
+            {
+                Code = 200,
+                Message = "Success",
+                Data = result
+            });
+        }
+        [HttpGet("Confirmation")]
+        public async Task<IActionResult> ConfirmCheckoutAsync()
+        {
+            var result = await _service.ConfirmCheckoutAsync();
+            if (!result)
+            {
+                return Ok(new TFResult<bool>()
+                {
+                    Code = 400,
+                    Message = "Empty cart",
+                    Data = false
+                });
+            }
+            return Ok(new TFResult<bool>()
+            {
+                Code = 200,
+                Message = "Success",
+                Data = result
+            });
+        }
     }
 }

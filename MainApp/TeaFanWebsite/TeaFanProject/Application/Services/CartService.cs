@@ -25,20 +25,7 @@ namespace TeaFanProject.Application.Services
         public async Task<CartModal> GetCurrentCartDetail()
         {
             var currentCartID = await GetCurrentCartAsync();
-            // Update current price
-            var checkPrice = await _context.CartDetails.Where(x => x.CartID == currentCartID).ToListAsync();
-            foreach(var item in checkPrice)
-            {
-                var currentPrice = await _context.Products.Where(x => x.ProductID == item.ProductID).Select(x => x.SalePrice).FirstOrDefaultAsync();
-                if(item.SoldPrice != currentPrice)
-                {
-                    item.SoldPrice = currentPrice;
-                    item.Total = currentPrice * item.Quantity;
-                }
-            }
-            await _context.SaveChangesAsync();
-            // Get list details
-            var details = checkPrice.Select(x => new CartDetailModal()
+            var details = (await UpdateProductPrice(currentCartID)).Select(x => new CartDetailModal()
             {
                 ProductID = x.ProductID,
                 SoldPrice = x.SoldPrice,
@@ -99,6 +86,41 @@ namespace TeaFanProject.Application.Services
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<CartModal> GetCheckoutAsync()
+        {
+            var currentCartID = await GetCurrentCartAsync();
+            var check = await UpdateProductPrice(currentCartID);
+            if (check.Count == 0) return null;
+            var details = check.Select(x => new CartDetailModal()
+            {
+                ProductID = x.ProductID,
+                SoldPrice = x.SoldPrice,
+                Quantity = x.Quantity,
+                ProductName = _context.Products.Where(p => p.ProductID == x.ProductID).Select(p => p.ProductName).FirstOrDefault(),
+                ImageURL = _context.ProductImages.Where(i => i.ProductID == x.ProductID).Select(i => i.ImageLink).FirstOrDefault(),
+                Total = x.Total
+            }).ToList();
+            var count = details.Sum(x => x.Total);
+            return new CartModal()
+            {
+                CartID = currentCartID,
+                ShippingPrice = 8,
+                Total = count,
+                Details = details
+            };
+        }
+        public async Task<bool> ConfirmCheckoutAsync()
+        {
+            var currentCartID = await GetCurrentCartAsync();
+            var check = await UpdateProductPrice(currentCartID);
+            if (check.Count == 0) return false;
+            var count = check.Sum(x => x.Total);
+            var cart = await _context.Carts.Where(x => x.CartID == currentCartID).FirstOrDefaultAsync();
+            cart.CreatedDate = DateTime.Now;
+            cart.ShippingPrice = 8;
+            cart.Total = count;
+            return true;
+        }
         public async Task<int> GetCurrentCartAsync()
         {
             var currentCart = await _context.Carts.Where(x => x.UserID == _currentUser.UserId && x.Total == 0).FirstOrDefaultAsync();
@@ -115,6 +137,22 @@ namespace TeaFanProject.Application.Services
                 return await _context.Carts.Where(x => x.UserID == _currentUser.UserId && x.Total == 0).Select(x => x.CartID).FirstOrDefaultAsync();
             }
             return currentCart.CartID;
+        }
+
+        public async Task<List<CartDetail>> UpdateProductPrice(int cartID)
+        {
+            var checkPrice = await _context.CartDetails.Where(x => x.CartID == cartID).ToListAsync();
+            foreach (var item in checkPrice)
+            {
+                var currentPrice = await _context.Products.Where(x => x.ProductID == item.ProductID).Select(x => x.SalePrice).FirstOrDefaultAsync();
+                if (item.SoldPrice != currentPrice)
+                {
+                    item.SoldPrice = currentPrice;
+                    item.Total = currentPrice * item.Quantity;
+                }
+            }
+            await _context.SaveChangesAsync();
+            return checkPrice;
         }
     }
 }

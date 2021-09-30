@@ -12,5 +12,7 @@ namespace TeaFanProject.Application.Interfaces
         Task<bool> AddProductAsync(AddProduct2CartRequest request);
         Task<bool> ChangeQuantityAsync(EditQuantityRequest request);
         Task<bool> RemoveProductAsync(RemoveProductInCartRequest request);
+        Task<CartModal> GetCheckoutAsync();
+        Task<bool> ConfirmCheckoutAsync();
     }
 }
