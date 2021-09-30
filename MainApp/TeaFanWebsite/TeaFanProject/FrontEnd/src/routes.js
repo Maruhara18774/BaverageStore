@@ -3,6 +3,8 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Profie from "./Pages/Profie";
 import CateShop from "./Pages/Category";
+import CartForm from "./Pages/Cart/CartForm";
+import CheckoutForm from "./Pages/Cart/Checkout";
 
 var routes = [
   {
@@ -38,6 +40,20 @@ var routes = [
     name: "Shop",
     icon: "fas fa-home",
     component: CateShop,
+    isSideBar: true,
+  },
+  {
+    path: "/cart",
+    name: "Shop",
+    icon: "fas fa-home",
+    component: CartForm,
+    isSideBar: true,
+  },
+  {
+    path: "/checkout",
+    name: "Shop",
+    icon: "fas fa-home",
+    component: CheckoutForm,
     isSideBar: true,
   },
 ];
