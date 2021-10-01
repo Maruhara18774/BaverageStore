@@ -32,6 +32,26 @@ const CartApi = {
         //alert(error);
         console.error(error);
       }
+  },
+  changeQuantityAsync: async (request) =>{
+    try {
+      const url = baseApiUrl+"/Edit";
+      var result = await API.post(url,request);
+      return result;
+    } catch (error) {
+      //alert(error);
+      console.error(error);
+    }
+  },
+  removeProductAsync: async (request) =>{
+    try {
+      const url = baseApiUrl+"/Remove";
+      var result = await API.post(request);
+      return result;
+    } catch (error) {
+      //alert(error);
+      console.error(error);
+    }
   }
 };
 export default CartApi;

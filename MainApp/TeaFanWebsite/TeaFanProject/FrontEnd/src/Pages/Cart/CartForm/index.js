@@ -1,29 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './style.css';
-import CartApi from '../../../Api/CartApi';
+import CartContent from '../../../Components/Cart/CartContent';
+import {useHistory} from 'react-router-dom'
 
-export class CartForm extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-             cart: {}
-        };
+export default function CartForm() {
+    const history = useHistory();
+    function Checkout(){
+        history.push("/checkout")
     }
-    async componentDidMount(){
-        var cart = await CartApi.getCurrentCartAsync();
-        this.setState({cart: cart.data});
-    }
-    getListProductPage(){}
-    render() {
-        return (
-            <div className="my-wrap">
-                {this.state.cart.details === null?
-                <p>Empty cart</p>:
-                this.getListProductPage()}
+    return (
+        <div className="my-wrap">
+                <CartContent/>
+                <button onClick = {Checkout}>Checkout</button>
             </div>
-        )
-    }
+    )
 }
-
-export default CartForm
