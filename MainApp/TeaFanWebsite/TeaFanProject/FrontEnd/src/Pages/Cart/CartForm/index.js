@@ -12,12 +12,15 @@ export class CartForm extends Component {
     }
     async componentDidMount(){
         var cart = await CartApi.getCurrentCartAsync();
-        this.setState({cart: cart});
+        this.setState({cart: cart.data});
     }
+    getListProductPage(){}
     render() {
         return (
             <div className="my-wrap">
-                This is your cart
+                {this.state.cart.details === null?
+                <p>Empty cart</p>:
+                this.getListProductPage()}
             </div>
         )
     }

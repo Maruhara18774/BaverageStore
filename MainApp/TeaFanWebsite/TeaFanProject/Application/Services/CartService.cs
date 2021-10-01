@@ -38,7 +38,7 @@ namespace TeaFanProject.Application.Services
                 CartID = currentCartID,
                 ShippingPrice = 0,
                 Total = 0,
-                Details = details
+                Details = details.Count == 0 ? null: details
             };
         }
 
