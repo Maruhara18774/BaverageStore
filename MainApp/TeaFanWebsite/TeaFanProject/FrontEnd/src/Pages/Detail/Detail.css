@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap");
+.detail-container {
+  margin-top: 8%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: auto;
+}
+.img-group {
+  display: flex !important;
+  height: 662px;
+  width: 55%;
+  box-sizing: border-box;
+}
+.img-small {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 5%;
+}
+.ant-image {
+  margin-top: 20px;
+}
+.content-name {
+  font-size: 2.5vw;
+  font-weight: 600;
+}
+.detail-content {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  font-family: "Scheherazade New", serif;
+  font-size: 1.4vw;
+  margin-top: 20px;
+}
+.buy {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  align-items: center;
+}
+.add-btn {
+  width: 70%;
+  font-weight: 600;
+}
+.product-intruction {
+  background-color: #f4f4f4;
+  height: 400px;
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.instruction-wrapper {
+  display: flex;
+  width: 60%;
+  justify-content: space-between;
+}
+.info1 {
+  width: 45%;
+}
+.info2 {
+  width: 45%;
+}
+.product-intruction {
+  font-family: "Scheherazade New", serif;
+}
+.info-content {
+  font-size: 1.15rem;
+}
+.review-header {
+  display: flex;
+  justify-content: space-between;
+}
+.review-rating {
+  padding-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.review-rating-wrapper {
+  width: 80%;
+}
+.comment-date {
+  color: #b8b5b5;
+  font-size: 0.88em;
+  font-weight: 600;
+}
+.comment {
+  border-bottom: 1px solid #a7a7a7;
+  padding: 10px 0 10px 0 !important;
+  margin-left: 0 !important;
+}
+.cmt-title {
+  display: flex;
+  flex-direction: column;
+}
+.title-input {
+  width: 20%;
+}

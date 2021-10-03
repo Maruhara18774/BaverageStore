@@ -3,7 +3,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Profie from "./Pages/Profie";
 import CateShop from "./Pages/Category";
-
+import Detail from "./Pages/Detail";
 var routes = [
   {
     path: "/home",
@@ -38,6 +38,13 @@ var routes = [
     name: "Shop",
     icon: "fas fa-home",
     component: CateShop,
+    isSideBar: true,
+  },
+  {
+    path: "/detail/:id",
+    name: "Detail",
+    icon: "fas fa-home",
+    component: Detail,
     isSideBar: true,
   },
 ];
