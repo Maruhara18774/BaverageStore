@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeaFanProject.Application.Interfaces;
 using TeaFanProject.Data;
+using TeaFanProject.DesignPatterns.IteratorPattern;
 using TeaFanProject.Entities;
 using TeaFanProject.ViewModals.Common;
 using TeaFanProject.ViewModals.HomeService;
@@ -91,31 +92,42 @@ namespace TeaFanProject.Application.Services
             }
             var page = request.Page > 0 ? request.Page : 1;
             var endData = result.Skip((page - 1) * 12).Take(12).ToList();
-            switch (request.SortBy)
+            var collection = new ProductRespondCollection(endData, request.SortBy);
+            if(request.SortType == "Desc")
             {
-                case "Name":
-                    if(request.SortType == "Desc")
-                    {
-                        endData =  endData.OrderByDescending(x => x.ProductName).ToList();
-                    }
-                    else
-                    {
-                        endData = endData.OrderBy(x => x.ProductName).ToList();
-                    }
-                    break;
-                case "Price":
-                    if (request.SortType == "Desc")
-                    {
-                        endData = endData.OrderByDescending(x => x.SalePrice).ToList();
-                    }
-                    else
-                    {
-                        endData = endData.OrderBy(x => x.SalePrice).ToList();
-                    }
-                    break;
-                default:
-                    break;
+                collection.ReverseDirection();
             }
+            endData.Clear();
+            foreach(var item in collection)
+            {
+                endData.Add();
+            }
+            endData = collection.getItems();
+            //switch (request.SortBy)
+            //{
+            //    case "Name":
+            //        if(request.SortType == "Desc")
+            //        {
+            //            endData =  endData.OrderByDescending(x => x.ProductName).ToList();
+            //        }
+            //        else
+            //        {
+            //            endData = endData.OrderBy(x => x.ProductName).ToList();
+            //        }
+            //        break;
+            //    case "Price":
+            //        if (request.SortType == "Desc")
+            //        {
+            //            endData = endData.OrderByDescending(x => x.SalePrice).ToList();
+            //        }
+            //        else
+            //        {
+            //            endData = endData.OrderBy(x => x.SalePrice).ToList();
+            //        }
+            //        break;
+            //    default:
+            //        break;
+            //}
             
             var finalResult = new TFPagedResult<ProductRespond>()
             {
