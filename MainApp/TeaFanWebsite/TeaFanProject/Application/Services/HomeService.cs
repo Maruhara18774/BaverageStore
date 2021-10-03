@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeaFanProject.Application.Interfaces;
 using TeaFanProject.Data;
+using TeaFanProject.DesignPatterns.SingletonPattern;
 using TeaFanProject.Entities;
 using TeaFanProject.Infrastructures.Identity;
 using TeaFanProject.ViewModals.HomeService;
@@ -18,12 +19,13 @@ namespace TeaFanProject.Application.Services
         public HomeService(ApplicationDbContext context)
         {
             _context = context;
+            CategorySingleton.Init(_context);
         }
 
         public async Task<List<Category>> GetListCategoryAsync()
         {
-            var listCate = await _context.Categories.ToListAsync();
-            return listCate;
+            var cate = CategorySingleton.GetInstance().GetCategory();
+            return cate;
         }
 
         public async Task<List<ProductTypeModal>> GetListProductTypeByCateAsync(int categoryID)
@@ -66,7 +68,7 @@ namespace TeaFanProject.Application.Services
 
         public async Task<Category> GetCategoryByID(int id)
         {
-            var cate = await _context.Categories.Where(x => x.CategoryID == id).FirstOrDefaultAsync();
+            var cate = CategorySingleton.GetInstance().GetCategory().Where(x => x.CategoryID == id).FirstOrDefault();
             return cate;
         }
     }

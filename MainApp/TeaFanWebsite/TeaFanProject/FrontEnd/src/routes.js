@@ -4,6 +4,9 @@ import Register from "./Pages/Register";
 import Profie from "./Pages/Profie";
 import CateShop from "./Pages/Category";
 import Detail from "./Pages/Detail";
+import CartForm from "./Pages/Cart/CartForm";
+import CheckoutForm from "./Pages/Cart/Checkout";
+
 var routes = [
   {
     path: "/home",
@@ -45,6 +48,17 @@ var routes = [
     name: "Detail",
     icon: "fas fa-home",
     component: Detail,
+    path: "/cart",
+    name: "Shop",
+    icon: "fas fa-home",
+    component: CartForm,
+    isSideBar: true,
+  },
+  {
+    path: "/checkout",
+    name: "Shop",
+    icon: "fas fa-home",
+    component: CheckoutForm,
     isSideBar: true,
   },
 ];

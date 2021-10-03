@@ -67,9 +67,9 @@ export class Nav extends Component {
             }
           </li>
           <li>
-            <a href="/cart">
+            <Link to="/cart">
               <ShoppingCartOutlined />
-            </a>
+            </Link>
           </li>
         </div>
       </div>
