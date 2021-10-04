@@ -8,26 +8,37 @@ namespace TeaFanProject.DesignPatterns.IteratorPattern
 {
     public class ProductOrderIterator : Iterator
     {
-        ProductRespondCollection _collection;
+        List<ProductRespond> _collection;
         int _position = -1;
         bool _reverse = false;
-        public ProductOrderIterator(ProductRespondCollection collection, bool reverse = false)
+        public ProductOrderIterator(List<ProductRespond> collection, string type, bool reverse = false)
         {
-            this._collection = collection;
+            switch (type)
+            {
+                case "Name":
+                    _collection = collection.OrderBy(x => x.ProductName).ToList();
+                    break;
+                case "Price":
+                    _collection = collection.OrderBy(x => x.Price).ToList();
+                    break;
+                default:
+                    _collection = collection.OrderBy(x => x.ProductID).ToList();
+                    break;
+            }
             this._reverse = reverse;
             if (reverse)
             {
-                this._position = collection.getItems().Count;
+                this._position = collection.Count;
             }
         }
-        public override object Current() => this._collection.getItems()[_position];
+        public override ProductRespond Current() => this._collection[_position];
 
         public override int Key() => this._position;
 
         public override bool MoveNext()
         {
             int updatedPosition = this._position + (this._reverse ? -1 : 1);
-            if (updatedPosition >= 0 && updatedPosition < this._collection.getItems().Count)
+            if (updatedPosition >= 0 && updatedPosition < this._collection.Count)
             {
                 this._position = updatedPosition;
                 return true;
@@ -37,7 +48,8 @@ namespace TeaFanProject.DesignPatterns.IteratorPattern
 
         public override void Reset()
         {
-            this._position = this._reverse ? _collection.getItems().Count - 1 : 0;
+            this._position = this._reverse ? _collection.Count - 1 : 0;
         }
+        public List<ProductRespond> getItems() => _collection;
     }
 }

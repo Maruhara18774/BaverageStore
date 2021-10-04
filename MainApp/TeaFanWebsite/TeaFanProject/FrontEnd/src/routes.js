@@ -48,6 +48,9 @@ var routes = [
     name: "Detail",
     icon: "fas fa-home",
     component: Detail,
+    isSideBar: true,
+  },
+  {
     path: "/cart",
     name: "Shop",
     icon: "fas fa-home",

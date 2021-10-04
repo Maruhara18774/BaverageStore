@@ -16,7 +16,7 @@ export class CheckoutForm extends Component {
         var user = await AccountApi.profie();
         this.setState({cart: cart, user:user});
     }
-    checkOut(){
+    async checkOut(){
         await CartApi.confirmCheckoutAsync();
     }
     render() {

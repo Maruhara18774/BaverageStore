@@ -29,7 +29,7 @@ export class CartContent extends Component {
         await CartApi.removeProductAsync(request);
         await this.updateCurrentCart();
     }
-    updateCurrentCart(){
+    async updateCurrentCart(){
         var result = await CartApi.getCurrentCartAsync();
         this.setState({cart: result.data});
     }

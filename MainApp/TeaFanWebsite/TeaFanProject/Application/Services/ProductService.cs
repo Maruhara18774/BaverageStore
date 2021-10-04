@@ -92,17 +92,20 @@ namespace TeaFanProject.Application.Services
             }
             var page = request.Page > 0 ? request.Page : 1;
             var endData = result.Skip((page - 1) * 12).Take(12).ToList();
-            var collection = new ProductRespondCollection(endData, request.SortBy);
+            ProductOrderIterator collection;
             if(request.SortType == "Desc")
             {
-                collection.ReverseDirection();
+                collection = new ProductOrderIterator(endData, request.SortType, true);
+            }
+            else
+            {
+                collection = new ProductOrderIterator(endData, request.SortType);
             }
             endData.Clear();
-            foreach(var item in collection)
+            while (collection.MoveNext())
             {
-                endData.Add();
+                endData.Add(collection.Current());
             }
-            endData = collection.getItems();
             //switch (request.SortBy)
             //{
             //    case "Name":
