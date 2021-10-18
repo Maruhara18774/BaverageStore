@@ -1,0 +1,96 @@
+.cart-content {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.cart-card {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 150px;
+  width: 100%;
+}
+.cart-info {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100%;
+}
+.cart-item-price,
+.cart-item-name {
+  font-family: "Cormorant", serif;
+  font-weight: 600;
+  color: #686868;
+}
+.update {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #898787;
+  font-size: 1vw;
+}
+.remove {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #ebb549;
+  font-size: 1vw;
+}
+.cart-item-name {
+  margin-bottom: 0 !important;
+}
+.cart-item-price {
+  font-size: 1.3vw;
+}
+.cart-quantity-wrapper {
+  position: relative;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  height: 21%;
+  margin-top: 5px;
+}
+.cart-quantity {
+  position: relative;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.update {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.remove {
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+}
+.increment {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  width: 30%;
+  padding: 0 !important;
+  background-color: #e0dedd;
+}
+.descrement {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  width: 30%;
+  padding: 0 !important;
+  background-color: #e0dedd;
+}
+
+.quantity {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+.ant-input-number-input {
+  text-align: center !important;
+}
+
+.cart-img {
+  width: 20%;
+  height: 100%;
+  object-fit: fill;
+}

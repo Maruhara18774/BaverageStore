@@ -15,6 +15,7 @@ import {
 import moment from "moment";
 import ProductApi from "../../Api/ProductApi";
 import { useHistory } from "react-router";
+import CartApi from "../../Api/CartApi";
 export default function Detail(props) {
   const [comment, setComment] = useState("");
   const [titleComment, setTitleComment] = useState("");
@@ -22,6 +23,8 @@ export default function Detail(props) {
   const [feedback, setFeedback] = useState();
   const [totalfeedback, setTotalfeedback] = useState();
   const [detail, setDetail] = useState();
+  const [quantity, setQuantity] = useState(1);
+
   const history = useHistory();
   useEffect(() => {
     ProductApi.getDetail(props.match.params.id)
@@ -58,6 +61,12 @@ export default function Detail(props) {
       setTitleComment("");
       setRateComment(3);
       setComment("");
+    });
+  };
+  const addToCart = () => {
+    CartApi.addProductAsync({
+      productID: props.match.params.id,
+      quantity,
     });
   };
 
@@ -105,10 +114,14 @@ export default function Detail(props) {
             <InputNumber
               min={1}
               max={100}
-              defaultValue={1}
-              // onChange={onChange}
+              value={quantity}
+              onChange={(e) => {
+                setQuantity(e);
+              }}
             />
-            <Button className="add-btn">ADD TO CART - ${detail?.price}</Button>
+            <Button className="add-btn" onClick={addToCart}>
+              ADD TO CART - ${detail?.price}
+            </Button>
           </div>
         </div>
       </div>
