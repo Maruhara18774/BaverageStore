@@ -8,23 +8,24 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Asus\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\BaverageStore\\MainApp\\TeaFanWebsite\\TeaFanProject.ViewModals\\TeaFanProject.ViewModals.csproj",
+      "projectUniqueName": "D:\\Univer\\4-HK1\\Project\\MTKPM\\MainApp\\TeaFanWebsite\\TeaFanProject.ViewModals\\TeaFanProject.ViewModals.csproj",
       "projectName": "TeaFanProject.ViewModals",
-      "projectPath": "D:\\BaverageStore\\MainApp\\TeaFanWebsite\\TeaFanProject.ViewModals\\TeaFanProject.ViewModals.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\BaverageStore\\MainApp\\TeaFanWebsite\\TeaFanProject.ViewModals\\obj\\",
+      "projectPath": "D:\\Univer\\4-HK1\\Project\\MTKPM\\MainApp\\TeaFanWebsite\\TeaFanProject.ViewModals\\TeaFanProject.ViewModals.csproj",
+      "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
+      "outputPath": "D:\\Univer\\4-HK1\\Project\\MTKPM\\MainApp\\TeaFanWebsite\\TeaFanProject.ViewModals\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -64,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
