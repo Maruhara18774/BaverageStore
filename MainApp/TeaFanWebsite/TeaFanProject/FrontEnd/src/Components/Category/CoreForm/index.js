@@ -47,9 +47,11 @@ export class ShopForm extends Component {
       request: request,
     });
   }
-  goToDetail(id){
-    alert(id);
+
+  goToDetail(id) {
+    window.open(`/detail/${id}`);
   }
+
   render() {
     if (this.props.cateID !== this.state.currentCate) {
       this.initial();
@@ -97,7 +99,12 @@ export class ShopForm extends Component {
               renderItem={(item) => (
                 <List.Item key={item.productID}>
                   <div className="product-list-box">
-                    <div className="product-card" onClick={()=>{this.goToDetail(item.productID)}}>
+                    <div
+                      className="product-card"
+                      onClick={() => {
+                        this.goToDetail(item.productID);
+                      }}
+                    >
                       <div className="product-imgBox">
                         <img
                           src={`https://localhost:44330${item.images[0]}`}

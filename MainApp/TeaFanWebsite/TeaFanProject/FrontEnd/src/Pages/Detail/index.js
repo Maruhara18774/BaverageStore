@@ -11,7 +11,9 @@ import {
   Col,
   Form,
   Input,
+  Modal,
 } from "antd";
+import { HeartTwoTone } from "@ant-design/icons";
 import moment from "moment";
 import ProductApi from "../../Api/ProductApi";
 import { useHistory } from "react-router";
@@ -24,6 +26,7 @@ export default function Detail(props) {
   const [totalfeedback, setTotalfeedback] = useState();
   const [detail, setDetail] = useState();
   const [quantity, setQuantity] = useState(1);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const history = useHistory();
   useEffect(() => {
@@ -58,6 +61,13 @@ export default function Detail(props) {
       title: titleComment,
       content: comment,
     }).then((res) => {
+      ProductApi.getListfeedback({
+        page: 1,
+        productID: props.match.params.id,
+      }).then((res) => {
+        setFeedback(res.data.items);
+        setTotalfeedback(res.data.totalRecords);
+      });
       setTitleComment("");
       setRateComment(3);
       setComment("");
@@ -68,6 +78,17 @@ export default function Detail(props) {
       productID: props.match.params.id,
       quantity,
     });
+  };
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   // const CommentList = ({ comments }) => (
@@ -100,7 +121,7 @@ export default function Detail(props) {
           </div>
           <Image
             className="img-large"
-            width={569}
+            width={589}
             height={662}
             src={`https://localhost:44330${detail?.images[0]}`}
           />
@@ -119,66 +140,88 @@ export default function Detail(props) {
                 setQuantity(e);
               }}
             />
-            <Button className="add-btn" onClick={addToCart}>
+            <Button
+              className="add-btn"
+              onClick={() => {
+                addToCart();
+                showModal();
+              }}
+            >
               ADD TO CART - ${detail?.price}
             </Button>
-          </div>
-        </div>
-      </div>
-      <div className="product-intruction">
-        <div className="instruction-wrapper">
-          <div className="info1">
-            <h1 className="info-title">Product Details</h1>
-            <div className="info-content">
-              <p>Material: {detail?.other.material}</p>
-              <p>Color: {detail?.other.color}</p>
-            </div>
-            <div className="brand">
-              <h1 className="info-title">Brand</h1>
-              <p className="info-content">{detail?.brand}</p>
-            </div>
-          </div>
-          <div className="info2">
-            <h1 className="info-title">Dimensions</h1>
-            <div className="info-content">
+            <Modal
+              title="Art of Tea"
+              visible={isModalVisible}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
               <p>
-                {detail?.other.demensions[0].demensionName}:&nbsp;
-                {detail?.other.demensions[0].value}
-                {detail?.other.demensions[0].unit}
+                Your product has been successfully added to the cart{" "}
+                <HeartTwoTone twoToneColor="#eb2f96" />
               </p>
-            </div>
-            <div className="origin">
-              <h1 className="info-title">Origin</h1>
-              <p className="info-content">{detail?.origin}</p>
-            </div>
+            </Modal>
           </div>
         </div>
       </div>
-      {/* <div className="product-intruction">
-        <div className="instruction-wrapper">
-          <div className="info1">
-            <h1 className="info-title">Steeping Instructions</h1>
-            <p className="info-content">
-              {detail?.other.material}
-              {detail?.other.color}
-            </p>
-            <div className="brand">
-              <h1 className="info-title">Brand</h1>
-              <p className="info-content">{detail?.brand}</p>
+
+      {detail?.tea ? (
+        <div className="product-intruction">
+          <div className="instruction-wrapper">
+            <div className="info1">
+              <h1 className="info-title">Steeping Instructions</h1>
+              <div className="info-content">
+                <p>Water temperature: {detail?.tea.waterTemperature} F</p>
+                <p>Steep time: {detail?.tea.steepTime}</p>
+                <p>Serving size: {detail?.tea.servingSize}</p>
+              </div>
+              <div className="brand">
+                <h1 className="info-title">Brand</h1>
+                <p className="info-content">{detail?.brand}</p>
+              </div>
             </div>
-          </div>
-          <div className="info2">
-            <h1 className="info-title">Ingredients</h1>
-            <p className="info-content">
-              {detail?.other.demensions[0].demensionName}
-            </p>
-            <div className="origin">
-              <h1 className="info-title">Origin</h1>
-              <p className="info-content">{detail?.origin}</p>
+            <div className="info2">
+              <h1 className="info-title">Ingredients</h1>
+              <div className="info-content">
+                <p>{detail?.tea.ingredients}</p>
+              </div>
+              <div className="origin">
+                <h1 className="info-title">Origin</h1>
+                <p className="info-content">{detail?.origin}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div> */}
+      ) : (
+        <div className="product-intruction">
+          <div className="instruction-wrapper">
+            <div className="info1">
+              <h1 className="info-title">Product Details</h1>
+              <div className="info-content">
+                <p>Material: {detail?.other.material}</p>
+                <p>Color: {detail?.other.color}</p>
+              </div>
+              <div className="brand">
+                <h1 className="info-title">Brand</h1>
+                <p className="info-content">{detail?.brand}</p>
+              </div>
+            </div>
+            <div className="info2">
+              <h1 className="info-title">Dimensions</h1>
+              <div className="info-content">
+                <p>
+                  {detail?.other.demensions[0].demensionName}:&nbsp;
+                  {detail?.other.demensions[0].value}
+                  {detail?.other.demensions[0].unit}
+                </p>
+              </div>
+              <div className="origin">
+                <h1 className="info-title">Origin</h1>
+                <p className="info-content">{detail?.origin}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="review-rating">
         <div className="review-rating-wrapper">
           <div className="review-header">

@@ -13,10 +13,20 @@ export class CheckoutForm extends Component {
       user: {},
     };
   }
+
   async componentDidMount() {
     var cart = await CartApi.getCheckoutInforAsync();
     var user = await AccountApi.profie();
-    this.setState({ cart: cart.data.details, user: user });
+    var subtotal = 0;
+    cart.data.details.map((item) => {
+      subtotal += item.soldPrice * item.quantity;
+    });
+    this.setState({
+      cart: cart.data.details,
+      user: user,
+      subtotal,
+      shippingPrice: cart.data.shippingPrice,
+    });
   }
   async checkOut() {
     await CartApi.confirmCheckoutAsync();
@@ -32,10 +42,26 @@ export class CheckoutForm extends Component {
           alignItems: "flex-start",
         }}
       >
-        <div style={{ width: "50%" }}>
+        <div style={{ width: "40%" }}>
           {this.state.cart?.map((item, index) => {
-            return <CartContent key={index} item={item} />;
+            return <CartContent key={index} item={item} checkout={true} />;
           })}
+          <hr style={{ width: "100%" }} />
+          <div className="sub-wrapper">
+            <div className="subtotal-shipping">
+              <p>Subtotal</p>
+              <p>{this.state.subtotal}$</p>
+            </div>
+            <div className="subtotal-shipping">
+              <p>Shipping</p>
+              <p>{this.state.shippingPrice}$</p>
+            </div>
+          </div>
+          <hr style={{ width: "100%" }} />
+          <div className="subtotal-shipping total">
+            <p>Total</p>
+            <p>{this.state.shippingPrice + this.state.subtotal}$</p>
+          </div>
         </div>
         <div style={{ width: "40%" }}>
           <h2>Contact Information</h2>
@@ -87,7 +113,13 @@ export class CheckoutForm extends Component {
             </Form.Item>
 
             <Form.Item wrapperCol={{ offset: 7, span: 17 }}>
-              <Button type="danger">Cancle</Button>
+              <Button className="cancle-btn">Cancle</Button>
+              {/* Paypal button here */}
+              <img
+                src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png"
+                alt="Check out with PayPal"
+                className="paypal-btn"
+              />
             </Form.Item>
           </Form>
         </div>

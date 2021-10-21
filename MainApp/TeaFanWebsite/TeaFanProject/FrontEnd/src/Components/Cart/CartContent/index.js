@@ -35,49 +35,75 @@ export class CartContent extends Component {
   render() {
     return (
       <div ChangeQuantity className="cart-content">
-        <div className="cart-card">
-          <img
-            src={`https://localhost:44330${this.props?.item.imageURL}`}
-            alt="img"
-            className="cart-img"
-          />
-          <div className="cart-info">
-            <h3 className="cart-item-name">{this.props?.item.productName}</h3>
-            <span className="cart-item-price">
-              {this.props?.item.soldPrice}$
-            </span>
-            {/* <span className="cart-item-price">
-              quantity: {this.props?.item.quantity}
-            </span> */}
-            <div className="cart-quantity-wrapper">
-              <div className="cart-quantity">
-                <Button
-                  className="cart-button descrement"
-                  disabled={this.props.item.quantity === 1 ? true : false}
-                  onClick={() =>
-                    this.ChangeQuantity(this.props.item.quantity - 1)
-                  }
-                >
-                  -
-                </Button>
-                <InputNumber
-                  value={this.props.item.quantity}
-                  className="quantity"
+        <div className="cart-card-wrapper">
+          {this.props.checkout ? (
+            <div className="cart-card-checkout">
+              <div className="img-wrapper-checkout">
+                <img
+                  src={`https://localhost:44330${this.props?.item.imageURL}`}
+                  alt="img"
+                  className="cart-img-checkout"
                 />
-                <Button
-                  className="cart-button increment"
-                  onClick={() =>
-                    this.ChangeQuantity(this.props.item.quantity + 1)
-                  }
-                >
-                  +
-                </Button>
+                <div className="cart-item-quantity">
+                  <span>{this.props?.item.quantity}</span>
+                </div>
+              </div>
+              <div className="cart-info-checkout">
+                <h3 className="cart-item-name">
+                  {this.props?.item.productName}
+                </h3>
+              </div>
+              <span className="cart-item-price-checkout">
+                {this.props?.item.soldPrice}$
+              </span>
+            </div>
+          ) : (
+            <div className="cart-card">
+              <img
+                src={`https://localhost:44330${this.props?.item.imageURL}`}
+                alt="img"
+                className="cart-img"
+              />
+              <div className="cart-info">
+                <h3 className="cart-item-name">
+                  {this.props?.item.productName}
+                </h3>
+                <span className="cart-item-price">
+                  {this.props?.item.soldPrice}$
+                </span>
+                <div className="cart-quantity-wrapper">
+                  <div className="cart-quantity">
+                    <Button
+                      className="cart-button descrement"
+                      disabled={this.props.item.quantity === 1 ? true : false}
+                      onClick={() =>
+                        this.ChangeQuantity(this.props.item.quantity - 1)
+                      }
+                    >
+                      -
+                    </Button>
+                    <InputNumber
+                      value={this.props.item.quantity}
+                      className="quantity"
+                    />
+                    <Button
+                      className="cart-button increment"
+                      onClick={() =>
+                        this.ChangeQuantity(this.props.item.quantity + 1)
+                      }
+                    >
+                      +
+                    </Button>
+                  </div>
+                </div>
+                {this.props.checkout ? null : (
+                  <span className="remove" onClick={this.RemoveProduct}>
+                    REMOVE
+                  </span>
+                )}
               </div>
             </div>
-            <span className="remove" onClick={this.RemoveProduct}>
-              REMOVE
-            </span>
-          </div>
+          )}
         </div>
       </div>
     );

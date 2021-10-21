@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 .home-container {
   margin-top: 5%;
   width: 100%;
@@ -56,23 +57,30 @@
   width: 100%;
 }
 .card-wrapper {
-  max-width: 407px;
-  height: 326px;
+  height: 300px;
 }
 .card-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
 }
 .shopfavorite {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 30%;
 }
 .shopfavorite h2 {
   color: #f8a191;
   margin-top: 10px;
+  text-align: center;
+}
+.shop-name {
+  color: #f8a191;
+  font-weight: 600;
+}
+.shop-name:hover {
+  color: #ec6e58 !important;
 }
 .custom {
   display: flex;

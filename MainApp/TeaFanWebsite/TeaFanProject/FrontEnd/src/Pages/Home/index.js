@@ -1,8 +1,15 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./Home.css";
+import ProductApi from "../../Api/ProductApi";
 import { Carousel, Button } from "antd";
-function index() {
+import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+function Home() {
+  const history = useHistory();
+  function Shopnow() {
+    history.push("shop/4");
+  }
   return (
     <div className="home-container">
       <Carousel className="main-carousel" autoplay="true">
@@ -12,9 +19,11 @@ function index() {
             alt="carousel1"
           />
           <div className="carousel-title">
-            <h1>Introducing Blue Pineapple Iced Tea</h1>
-            <p>Your new favorite summer sip</p>
-            <Button className="shopbtn">Shop now</Button>
+            <h1>Join the Tea Club</h1>
+            <p>Shop Our Tea of the Month</p>
+            <Button className="shopbtn" onClick={Shopnow}>
+              Shop now
+            </Button>
           </div>
         </div>
         <div className="carousel-item">
@@ -23,9 +32,11 @@ function index() {
             alt="carousel2"
           />
           <div className="carousel-title">
-            <h1>Introducing Blue Pineapple Iced Tea</h1>
-            <p>Your new favorite summer sip</p>
-            <Button className="shopbtn">Shop now</Button>
+            <h1>Sip Wellness This Season</h1>
+            <p>Perfect choice</p>
+            <Button className="shopbtn" onClick={Shopnow}>
+              Shop now
+            </Button>
           </div>
         </div>
         <div className="carousel-item">
@@ -34,9 +45,11 @@ function index() {
             alt="carousel3"
           />
           <div className="carousel-title">
-            <h1>Introducing Blue Pineapple Iced Tea</h1>
-            <p>Your new favorite summer sip</p>
-            <Button className="shopbtn">Shop now</Button>
+            <h1>Become A Tea Expert</h1>
+            <p>Join our Tea Club</p>
+            <Button className="shopbtn" onClick={Shopnow}>
+              Shop now
+            </Button>
           </div>
         </div>
         <div className="carousel-item">
@@ -46,8 +59,10 @@ function index() {
           />
           <div className="carousel-title">
             <h1>Introducing Blue Pineapple Iced Tea</h1>
-            <p>Your new favorite summer sip</p>
-            <Button className="shopbtn">Shop now</Button>
+            <p>Your New Favorite Summer Sip</p>
+            <Button className="shopbtn" onClick={Shopnow}>
+              Shop now
+            </Button>
           </div>
         </div>
       </Carousel>
@@ -69,7 +84,11 @@ function index() {
               alt="shoptea"
             />
           </div>
-          <h2>SHOP TEAS</h2>
+          <h2>
+            <Link className="shop-name" to="/shop/4">
+              SHOP TEAS
+            </Link>
+          </h2>
         </div>
         <div className="shopfavorite">
           <div className="card-wrapper">
@@ -78,7 +97,11 @@ function index() {
               alt="shopcollection"
             />
           </div>
-          <h2>SHOP COLLECTIONS</h2>
+          <h2>
+            <Link className="shop-name" to="/shop/1">
+              SHOP COLLECTIONS
+            </Link>
+          </h2>
         </div>
         <div className="shopfavorite">
           <div className="card-wrapper">
@@ -87,7 +110,11 @@ function index() {
               alt="shopteaware"
             />
           </div>
-          <h2>SHOP TEAWARE</h2>
+          <h2>
+            <Link className="shop-name" to="/shop/2">
+              SHOP TEAWARE
+            </Link>
+          </h2>
         </div>
       </div>
       <div className="trending">
@@ -114,4 +141,4 @@ function index() {
   );
 }
 
-export default index;
+export default Home;

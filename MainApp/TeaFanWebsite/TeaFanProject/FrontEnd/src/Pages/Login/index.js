@@ -17,7 +17,7 @@ function Login(props) {
         setErrorMessage(data.message);
       } else {
         localStorage.setItem("user", JSON.stringify(data.data));
-        history.push("/home");
+        history.push("/home"); /*phan quyen*/
       }
     });
   };

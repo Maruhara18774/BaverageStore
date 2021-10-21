@@ -20,7 +20,7 @@ export default function CartForm() {
       setListcart(res.data.details);
       setCartID(res.data.cartID);
       var total = 0;
-      res.data.details.map((item) => {
+      res.data.details?.map((item) => {
         total += item.soldPrice * item.quantity;
       });
       setSubTotal(total);
