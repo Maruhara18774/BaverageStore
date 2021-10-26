@@ -3,7 +3,7 @@ import CartApi from "../../../Api/CartApi";
 import AccountApi from "../../../Api/AccountApi";
 import CartContent from "../../../Components/Cart/CartContent";
 import Paypal from "../../../Components/Paypal";
-import { Input } from "antd";
+import { Button, Input } from "antd";
 import "./style.css";
 export class CheckoutForm extends Component {
   constructor(props) {
@@ -44,6 +44,14 @@ export class CheckoutForm extends Component {
   }
   async checkOut() {
     await CartApi.confirmCheckoutAsync();
+  }
+  checkValue(){
+    if(this.state.firstName==""
+    || this.state.lastName == ""
+    || this.state.email != ""
+    || this.state.phoneNumber != ""
+    || this.state.address!= "") return false;
+    return true;
   }
   render() {
     return (
@@ -133,7 +141,10 @@ export class CheckoutForm extends Component {
           </div>
 
           {/* <Button className="cancle-btn">Cancle</Button> */}
-          <Paypal val={this.state.total} name={this.state.firstName} />
+          {
+            this.checkValue()?<Button disabled>Please enter contact info</Button>:
+            <Paypal val={this.state.total} name={this.state.firstName} callback={()=>this.checkOut()}/>
+          }
         </div>
       </div>
     );
