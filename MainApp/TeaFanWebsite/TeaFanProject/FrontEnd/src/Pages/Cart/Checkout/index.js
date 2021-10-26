@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import CartApi from "../../../Api/CartApi";
 import AccountApi from "../../../Api/AccountApi";
 import CartContent from "../../../Components/Cart/CartContent";
-import { Button, Form, Input } from "antd";
+import Paypal from "../../../Components/Paypal";
+import { Input } from "antd";
 import "./style.css";
 export class CheckoutForm extends Component {
   constructor(props) {
@@ -11,21 +12,34 @@ export class CheckoutForm extends Component {
     this.state = {
       cart: [],
       user: {},
+      total: 0,
+      inputs: [
+        { name: "First name", error: "" },
+        { name: "Last name", error: "" },
+        { name: "Email", error: "" },
+        { name: "Phone number", error: "" },
+        { name: "Address", error: "" },
+      ],
     };
   }
-
+  handelValidate() {}
   async componentDidMount() {
     var cart = await CartApi.getCheckoutInforAsync();
-    var user = await AccountApi.profie();
+    var user = await AccountApi.profile();
     var subtotal = 0;
     cart.data.details.map((item) => {
       subtotal += item.soldPrice * item.quantity;
     });
     this.setState({
       cart: cart.data.details,
-      user: user,
+      firstName: user.data.firstName,
+      lastName: user.data.lastName,
+      email: user.data.email,
+      phoneNumber: user.data.phoneNumber,
+      address: user.data.address,
       subtotal,
       shippingPrice: cart.data.shippingPrice,
+      total: subtotal + cart.data.shippingPrice,
     });
   }
   async checkOut() {
@@ -60,68 +74,66 @@ export class CheckoutForm extends Component {
           <hr style={{ width: "100%" }} />
           <div className="subtotal-shipping total">
             <p>Total</p>
-            <p>{this.state.shippingPrice + this.state.subtotal}$</p>
+            <p>{this.state.total}$</p>
           </div>
         </div>
         <div style={{ width: "40%" }}>
           <h2>Contact Information</h2>
-          <Form
-            className="contact-info"
-            name="basic"
-            labelCol={{ span: 7 }}
-            wrapperCol={{ span: 17 }}
-            autoComplete="off"
-          >
-            <Form.Item
-              label="First Name"
-              name="firstname"
-              rules={[
-                { required: true, message: "Please input your firstname!" },
-              ]}
-            >
-              <Input className="input-info" />
-            </Form.Item>
-            <Form.Item
-              label="Last Name"
-              name="lastname"
-              rules={[
-                { required: true, message: "Please input your lastname!" },
-              ]}
-            >
-              <Input className="input-info" />
-            </Form.Item>
-            <Form.Item label="Your email" name="email">
-              <Input className="input-info" />
-            </Form.Item>
-            <Form.Item
-              label="Phone number"
-              name="phonenumber"
-              rules={[
-                { required: true, message: "Please input your phone number!" },
-              ]}
-            >
-              <Input className="input-info" />
-            </Form.Item>
-            <Form.Item
-              label="Your Address"
-              name="address"
-              rules={[
-                { required: true, message: "Please input your address!" },
-              ]}
-            >
-              <Input className="input-info" />
-            </Form.Item>
+          <div className="input-wrapper">
+            <span className="input-label">First name:</span>
+            <Input
+              className="input-info"
+              onChange={(e) => {
+                this.setState({ firstName: e.target.value });
+              }}
+              value={this.state.firstName}
+            />
+            <span></span>
+          </div>
+          <div className="input-wrapper">
+            <span className="input-label">Last name:</span>
+            <Input
+              className="input-info"
+              onChange={(e) => {
+                this.setState({ lastName: e.target.value });
+              }}
+              value={this.state.lastName}
+            />
+          </div>
+          <div className="input-wrapper">
+            <span className="input-label">Email:</span>
+            <Input
+              className="input-info"
+              onChange={(e) => {
+                this.setState({ email: e.target.value });
+              }}
+              value={this.state.email}
+            />
+          </div>
+          <div className="input-wrapper">
+            <span className="input-label">Phone number:</span>
+            <Input
+              className="input-info"
+              type="number"
+              value={this.state.phoneNumber}
+              onChange={(e) => {
+                this.setState({ phoneNumber: e.target.value });
+              }}
+            />
+          </div>
+          <div className="input-wrapper">
+            <span className="input-label">Address:</span>
+            <Input
+              className="input-info"
+              value={this.state.address}
+              onChange={(e) => {
+                this.setState({ address: e.target.value });
+              }}
+            />
+          </div>
 
-            <Form.Item wrapperCol={{ offset: 7, span: 17 }}>
-              <Button className="cancle-btn">Cancle</Button>
-              {/* Paypal button here */}
-              <img
-                src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-medium.png"
-                alt="Check out with PayPal"
-                className="paypal-btn"
-              />
-            </Form.Item>
-          </Form>
+          {/* <Button className="cancle-btn">Cancle</Button> */}
+          <Paypal val={this.state.total} name={this.state.firstName} />
         </div>
       </div>
     );

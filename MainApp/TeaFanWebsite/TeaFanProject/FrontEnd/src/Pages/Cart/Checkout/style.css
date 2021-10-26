@@ -1,5 +1,5 @@
 .input-info {
-  width: 100%;
+  width: 80%;
   border-radius: 14px;
   background: #eaeaea;
 }
@@ -17,4 +17,13 @@
 }
 .paypal-btn {
   float: right;
+}
+.input-wrapper {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.input-label {
+  width: 20%;
 }
