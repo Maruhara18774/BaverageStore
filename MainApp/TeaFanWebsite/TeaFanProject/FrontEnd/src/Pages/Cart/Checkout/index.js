@@ -20,6 +20,7 @@ export class CheckoutForm extends Component {
         { name: "Phone number", error: "" },
         { name: "Address", error: "" },
       ],
+      checkout: false
     };
   }
   handelValidate() {}
@@ -44,14 +45,8 @@ export class CheckoutForm extends Component {
   }
   async checkOut() {
     await CartApi.confirmCheckoutAsync();
-  }
-  checkValue(){
-    if(this.state.firstName==""
-    || this.state.lastName == ""
-    || this.state.email != ""
-    || this.state.phoneNumber != ""
-    || this.state.address!= "") return false;
-    return true;
+    alert("Done")
+    this.setState({checkout: true})
   }
   render() {
     return (
@@ -94,7 +89,7 @@ export class CheckoutForm extends Component {
               onChange={(e) => {
                 this.setState({ firstName: e.target.value });
               }}
-              value={this.state.firstName}
+              init={this.state.firstName}
             />
             <span></span>
           </div>
@@ -142,8 +137,18 @@ export class CheckoutForm extends Component {
 
           {/* <Button className="cancle-btn">Cancle</Button> */}
           {
-            this.checkValue()?<Button disabled>Please enter contact info</Button>:
-            <Paypal val={this.state.total} name={this.state.firstName} callback={()=>this.checkOut()}/>
+            this.state.firstName==""
+            ||this.state.lastName == ""
+            || this.state.email != ""
+            || this.state.phoneNumber != ""
+            || this.state.address!= ""
+            ?<Button disabled>Please enter contact info</Button>
+            :<Paypal val={this.state.total} name={this.state.firstName} callback={this.checkOut}/>
+          }
+          <div style={{width: "20px"}}></div>
+          {this.state.checkout?
+          <Button disabled>Checkout now</Button>:
+          <Button onClick={this.checkOut}>Checkout now</Button>
           }
         </div>
       </div>

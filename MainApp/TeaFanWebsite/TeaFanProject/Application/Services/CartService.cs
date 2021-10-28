@@ -119,6 +119,7 @@ namespace TeaFanProject.Application.Services
             cart.CreatedDate = DateTime.Now;
             cart.ShippingPrice = 8;
             cart.Total = count;
+            await _context.SaveChangesAsync();
             return true;
         }
         public async Task<int> GetCurrentCartAsync()
