@@ -22,7 +22,7 @@ namespace TeaFanProject.Application.Services
             CategorySingleton.Init(_context);
         }
 
-        public async Task<List<Category>> GetListCategoryAsync()
+        public List<Category> GetListCategoryAsync()
         {
             var cate = CategorySingleton.GetInstance().GetCategory();
             return cate;
@@ -66,7 +66,7 @@ namespace TeaFanProject.Application.Services
             return result;
         }
 
-        public async Task<Category> GetCategoryByID(int id)
+        public Category GetCategoryByID(int id)
         {
             var cate = CategorySingleton.GetInstance().GetCategory().Where(x => x.CategoryID == id).FirstOrDefault();
             return cate;
