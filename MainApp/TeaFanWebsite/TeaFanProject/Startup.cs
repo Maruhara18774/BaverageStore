@@ -79,6 +79,7 @@ namespace TeaFanProject
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IFeedbackService, FeedbackService>();
             services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IManageProductTypeService, ManageProductTypeService>();
 
             services.AddSpaStaticFiles(configuration =>
             {
