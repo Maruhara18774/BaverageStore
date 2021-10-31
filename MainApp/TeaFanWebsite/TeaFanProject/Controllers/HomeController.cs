@@ -20,9 +20,9 @@ namespace TeaFanProject.Controllers
             _homeService = homeService;
         }
         [HttpGet("Categories")]
-        public async Task<IActionResult> GetListCategoryAsync()
+        public IActionResult GetListCategoryAsync()
         {
-            var result = await _homeService.GetListCategoryAsync();
+            var result = _homeService.GetListCategoryAsync();
             var content = new TFResult<List<Category>>()
             {
                 Code = 200,
@@ -68,9 +68,9 @@ namespace TeaFanProject.Controllers
             return Ok(result);
         }
         [HttpGet("Category/{id}")]
-        public async Task<IActionResult> GetCategoryByIDAsync(int id)
+        public IActionResult GetCategoryByIDAsync(int id)
         {
-            var result = await _homeService.GetCategoryByID(id);
+            var result = _homeService.GetCategoryByID(id);
             var content = new TFResult<Category>()
             {
                 Code = 200,
