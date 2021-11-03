@@ -1,7 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./Home.css";
-import ProductApi from "../../Api/ProductApi";
+// import ProductApi from "../../Api/ProductApi";
 import { Carousel, Button } from "antd";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
