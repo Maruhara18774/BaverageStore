@@ -12,7 +12,7 @@ namespace TeaFanProject.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles ="Admin")]
+    [Authorize]
     public class ManageProductTypeController : Controller
     {
         private readonly IManageProductTypeService _service;
