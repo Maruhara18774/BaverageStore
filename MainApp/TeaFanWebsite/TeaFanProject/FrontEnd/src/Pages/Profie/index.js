@@ -14,13 +14,13 @@ export class Profie extends Component {
     };
   }
   async componentDidMount() {
-    var result = await AccountApi.profie();
+    var result = await AccountApi.profile();
     this.setState({ user: result.data });
   }
   async changePosition(position) {
     this.setState({ position: position });
     if (position === "detail") {
-      var result = await AccountApi.profie();
+      var result = await AccountApi.profile();
       this.setState({ user: result.data });
     }
   }

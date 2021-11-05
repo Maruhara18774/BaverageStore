@@ -6,9 +6,11 @@ import {
   VideoCameraOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
+import { Link, Route, Router } from "react-router-dom";
 import AdminApi from "../../Api/AdminApi";
 import ProductApi from "../../Api/ProductApi";
 import HomeApi from "../../Api/HomeApi";
+import ProductAdminApi from "../../Api/ProductAdminApi";
 const { Header, Sider, Content } = Layout;
 const columns = [
   {
@@ -42,26 +44,10 @@ function ManageHome(props) {
     setRowkey();
   };
   const { selectedRowKeys } = rowkey;
-  const request = {
-    page: 1,
-    productTypeID: 0,
-    flavorsID: [],
-    origin: "",
-    min: 0,
-    max: 0,
-    sortBy: "ASC",
-    pageCount: 1,
-    sortType: "",
-    categoryID: props.cateID,
-  };
-  useEffect(() => {
-    ProductApi.getList(request)
-      .then((res) => setProductList(res.data))
-      .catch((error) => {
-        console.log("error");
-      });
-  }, []);
 
+  useEffect(() => {
+    ProductAdminApi.getListAdmin(2).then((res) => setProductList(res.data));
+  }, []);
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -114,10 +100,10 @@ function ManageHome(props) {
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={["4"]}>
           <Menu.Item key="1" icon={<UserOutlined />}>
-            nav 1
+            {/* <Link to="/manageproduct">Sản phẩm</Link> */}aaaa
           </Menu.Item>
           <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            nav 2
+            {/* <Link to="/account">Tài khoản</Link> */}bbbbbbb
           </Menu.Item>
           <Menu.Item key="3" icon={<UploadOutlined />}>
             nav 3
@@ -132,6 +118,7 @@ function ManageHome(props) {
           className="site-layout-sub-header-background"
           style={{ padding: 0 }}
         />
+
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             className="site-layout-background"
@@ -144,6 +131,8 @@ function ManageHome(props) {
             />
           </div>
         </Content>
+
+        <Content style={{ margin: "24px 16px 0" }}>cccc</Content>
       </Layout>
     </Layout>
   );

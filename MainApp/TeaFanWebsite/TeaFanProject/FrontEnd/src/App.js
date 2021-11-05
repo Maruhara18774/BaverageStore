@@ -33,7 +33,7 @@ function App() {
       ref={mainContent}
       style={{ minHeight: "100vh", position: "relative" }}
     >
-      {/* <Nav></Nav> */}
+      <Nav></Nav>
       <Container fluid className="d-flex pt-md-5 flex-column flex-md-row">
         <Col className="px-2 py-3">
           <Switch>
@@ -42,7 +42,7 @@ function App() {
           </Switch>
         </Col>
       </Container>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 }
