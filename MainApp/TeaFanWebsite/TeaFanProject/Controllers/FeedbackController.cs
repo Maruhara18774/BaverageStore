@@ -22,16 +22,16 @@ namespace TeaFanProject.Controllers
         [HttpPost("List")]
         public async Task<IActionResult> GetListAsync(GetFeedbacksRequest request)
         {
-            if(request.ProductID <= 0)
+            var result = await _service.GetListFeedbackAsync(request);
+            if(result == null)
             {
                 return Ok(new TFResult<bool>()
                 {
                     Code = 400,
-                    Message = "Invalid product key",
+                    Message = "Invalid input",
                     Data = false
                 });
             }
-            var result = await _service.GetListFeedbackAsync(request);
             var content = new TFResult<TFPagedResult<FeedbackModal>>
             {
                 Code = 200,
@@ -44,20 +44,16 @@ namespace TeaFanProject.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> CreateFeedbackAsync(CreateFeedbackRequest request)
         {
-            if (request.ProductID <= 0 ||
-                request.StarCount < 0 ||
-                request.StarCount > 5 ||
-                String.IsNullOrWhiteSpace(request.Title)||
-                String.IsNullOrWhiteSpace(request.Content))
+            var result = await _service.CreateFeedbackAsync(request);
+            if (!result)
             {
                 return Ok(new TFResult<bool>()
                 {
                     Code = 400,
-                    Message = "Invalid parameters",
+                    Message = "Invalid input",
                     Data = false
                 });
             }
-            var result = await _service.CreateFeedbackAsync(request);
             var content = new TFResult<bool>()
             {
                 Code = 200,
