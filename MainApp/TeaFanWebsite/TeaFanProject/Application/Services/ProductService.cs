@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TeaFanProject.Application.Interfaces;
 using TeaFanProject.Data;
+using TeaFanProject.DesignPatterns.AdapterPattern;
 using TeaFanProject.DesignPatterns.IteratorPattern;
 using TeaFanProject.Entities;
 using TeaFanProject.ViewModals.Common;
@@ -146,6 +147,18 @@ namespace TeaFanProject.Application.Services
         {
             var product = await _context.Products.Where(x => x.ProductID == id).FirstOrDefaultAsync();
             if (product == null) return null;
+            var cateID = await _context.ProductTypes.Where(x => x.TypeID == product.TypeID).Select(x => x.CategoryID).FirstOrDefaultAsync();
+            if(await _context.Categories.Where(x => x.CategoryID == cateID).Select(x => x.IsTypeOfTea).FirstOrDefaultAsync())
+            {
+                TeaProductionDetail tea = new TeaProductionDetail(_context, product);
+                return new ProductionDetailToDetailModalAdapter(tea).GetDetailModal();
+            }
+            else
+            {
+                OtherProductionDetail other = new OtherProductionDetail(_context, product);
+                return new ProductionDetailToDetailModalAdapter(other).GetDetailModal();
+            }
+            /*
             var result = new DetailModal()
             {
                 ProductID = id,
@@ -206,6 +219,7 @@ namespace TeaFanProject.Application.Services
                 }
             }
             return result;
+            */
         }
 
         private bool CheckContain(List<int> arr1, List<FlavorModal> arr2)

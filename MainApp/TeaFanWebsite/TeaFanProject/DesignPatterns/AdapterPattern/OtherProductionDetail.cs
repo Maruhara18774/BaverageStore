@@ -1,20 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TeaFanProject.Data;
 using TeaFanProject.Entities;
-using TeaFanProject.ViewModals.HomeService;
 using TeaFanProject.ViewModals.ProductService;
 
 namespace TeaFanProject.DesignPatterns.AdapterPattern
 {
-    public class TeaProductionDetail: BaseDetailModal
+    public class OtherProductionDetail: BaseDetailModal
     {
-        public virtual List<FlavorModal> Flavors { get; set; }
-        public PTeaModal Tea { get; set; }
-        public TeaProductionDetail(ApplicationDbContext context, Product product)
+        public POtherModal Other { get; set; }
+
+        public OtherProductionDetail(ApplicationDbContext context, Product product)
         {
             ProductID = product.ProductID;
             ProductName = product.ProductName;
@@ -29,26 +27,25 @@ namespace TeaFanProject.DesignPatterns.AdapterPattern
             Brand = brand.BrandName;
             Origin = brand.Origin;
 
-            var flavor = (from f in context.Flavors
-                          join tf in context.ProductTeaFlavors on f.FlavorID equals tf.FlavorID
-                          join pt in context.ProductTeas on tf.ProductTeaID equals pt.ProductTeaID
-                          where pt.ProductID == product.ProductID
-                          select new FlavorModal()
-                          {
-                              FlavorID = f.FlavorID,
-                              FlavorName = f.FlavorName
-                          }).AsSplitQuery();
-            Flavors = flavor.ToList();
-            var tea = context.ProductTeas.Where(x => x.ProductID == product.ProductID).FirstOrDefault();
-            Tea = new PTeaModal()
+            var other = context.ProductOthers.Where(x => x.ProductID == product.ProductID).FirstOrDefault();
+            Other = new POtherModal()
             {
-                WaterTemperature = tea.WaterTemperature,
-                SteepTime = tea.SteepTime,
-                ServingSize = tea.ServingSize,
-                Ingredients = tea.Ingredients
+                Material = other.Material,
+                Color = other.Color,
+                CareInstruction = other.CareInstruction,
+                Demensions = new List<DemensionModal>()
             };
+            var demensionRefs = context.ProductOtherDemensions.Where(x => x.ProductOtherID == other.ProductOtherID).ToList();
+            foreach (var item in demensionRefs)
+            {
+                Other.Demensions.Add(new DemensionModal()
+                {
+                    DemensionName = context.Demensions.Where(x => x.DemensionID == item.DemensionID).Select(x => x.DemensionName).FirstOrDefault(),
+                    Value = item.Value,
+                    Unit = item.Unit
+                });
+            }
         }
-
         public override DetailModal GetBaseDetailModal()
         {
             return new DetailModal()

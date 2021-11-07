@@ -14,5 +14,6 @@ namespace TeaFanProject.ViewModals.ProductService
         public string Brand { get; set; }
         public PTeaModal Tea { get; set; }
         public POtherModal Other { get; set; }
+        public virtual DetailModal GetDetailModal() => this;
     }
 }
