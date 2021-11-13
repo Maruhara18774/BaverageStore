@@ -16,6 +16,7 @@ using TeaFanProject.Infrastructures.Identity;
 using TeaFanProject.Application.Interfaces;
 using TeaFanProject.Application.Services;
 using System.Threading.Tasks;
+using TeaFanProject.DesignPatterns.ProxyPattern;
 
 namespace TeaFanProject
 {
@@ -77,7 +78,7 @@ namespace TeaFanProject
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<IFeedbackService, FeedbackService>();
+            services.AddTransient<IFeedbackService, FeedbackServiceProxy>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IManageProductTypeService, ManageProductTypeService>();
             services.AddTransient<IManageProductService, ManageProductService>();

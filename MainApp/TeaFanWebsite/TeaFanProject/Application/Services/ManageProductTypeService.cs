@@ -21,7 +21,7 @@ namespace TeaFanProject.Application.Services
             if (request.CategoryID <= 0 || String.IsNullOrEmpty(request.TypeName)) return "Wrong input.";
             var category = await _context.Categories.Where(x => x.CategoryID == request.CategoryID).FirstOrDefaultAsync();
             if (category == null) return "Category not found.";
-            var type = await _context.ProductTypes.Where(x => x.CategoryID == request.CategoryID || x.TypeName == request.TypeName).FirstOrDefaultAsync();
+            var type = await _context.ProductTypes.Where(x => x.CategoryID == request.CategoryID && x.TypeName == request.TypeName).FirstOrDefaultAsync();
             if (type != null) return "Duplicated product type";
             _context.ProductTypes.Add(new Entities.ProductType()
             {
