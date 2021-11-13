@@ -1,11 +1,22 @@
 import API from "./API.js";
 
-const baseApiUrl = "/api/ManageProductType";
+const baseApiUrl = "/api";
 
 const AdminApi = {
-  addProduct: async (request) => {
+  addProductType: async (request) => {
+    console.log(request);
     try {
-      const url = baseApiUrl + "/Add";
+      const url = baseApiUrl + "/ManageProductType/Add";
+      var result = await API.post(url, request);
+      return result;
+    } catch (error) {
+      //alert(error);
+      console.error(error);
+    }
+  },
+  editProductType: async (request) => {
+    try {
+      const url = baseApiUrl + "/ManageProductType/Edit";
       var result = await API.post(url, { params: request });
       return result;
     } catch (error) {
@@ -13,20 +24,21 @@ const AdminApi = {
       console.error(error);
     }
   },
-  editProduct: async (request) => {
+  removeProductType: async (id) => {
     try {
-      const url = baseApiUrl + "/Edit";
-      var result = await API.post(url, { params: request });
+      const url = baseApiUrl + `/ManageProductType/${id}`;
+      var result = await API.delete(url);
       return result;
     } catch (error) {
       //alert(error);
       console.error(error);
     }
   },
-  removeProduct: async (request) => {
+
+  getListProduct: async (page) => {
     try {
-      const url = baseApiUrl + "/id";
-      var result = await API.delete(url, { params: request });
+      const url = baseApiUrl + `/ManageProduct/${page}`;
+      var result = await API.get(url);
       return result;
     } catch (error) {
       //alert(error);

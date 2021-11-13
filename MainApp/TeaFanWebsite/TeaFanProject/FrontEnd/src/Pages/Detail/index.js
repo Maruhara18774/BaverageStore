@@ -27,7 +27,6 @@ export default function Detail(props) {
   const [detail, setDetail] = useState();
   const [quantity, setQuantity] = useState(1);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const history = useHistory();
   useEffect(() => {
     ProductApi.getDetail(props.match.params.id)

@@ -20,7 +20,7 @@ export class CheckoutForm extends Component {
         { name: "Phone number", error: "" },
         { name: "Address", error: "" },
       ],
-      checkout: false
+      checkout: false,
     };
   }
   handelValidate() {}
@@ -28,25 +28,25 @@ export class CheckoutForm extends Component {
     var cart = await CartApi.getCheckoutInforAsync();
     var user = await AccountApi.profile();
     var subtotal = 0;
-    cart.data.details.map((item) => {
+    cart.data?.details.map((item) => {
       subtotal += item.soldPrice * item.quantity;
     });
     this.setState({
-      cart: cart.data.details,
-      firstName: user.data.firstName,
-      lastName: user.data.lastName,
-      email: user.data.email,
-      phoneNumber: user.data.phoneNumber,
-      address: user.data.address,
+      cart: cart.data?.details,
+      firstName: user.data?.firstName,
+      lastName: user.data?.lastName,
+      email: user.data?.email,
+      phoneNumber: user.data?.phoneNumber,
+      address: user.data?.address,
       subtotal,
-      shippingPrice: cart.data.shippingPrice,
-      total: subtotal + cart.data.shippingPrice,
+      shippingPrice: cart.data?.shippingPrice,
+      total: subtotal + cart.data?.shippingPrice,
     });
   }
   async checkOut() {
     await CartApi.confirmCheckoutAsync();
-    alert("Done")
-    this.setState({checkout: true})
+    alert("Done");
+    this.setState({ checkout: true });
   }
   render() {
     return (
@@ -136,20 +136,25 @@ export class CheckoutForm extends Component {
           </div>
 
           {/* <Button className="cancle-btn">Cancle</Button> */}
-          {
-            this.state.firstName==""
-            ||this.state.lastName == ""
-            || this.state.email != ""
-            || this.state.phoneNumber != ""
-            || this.state.address!= ""
-            ?<Button disabled>Please enter contact info</Button>
-            :<Paypal val={this.state.total} name={this.state.firstName} callback={this.checkOut}/>
-          }
-          <div style={{width: "20px"}}></div>
-          {this.state.checkout?
-          <Button disabled>Checkout now</Button>:
-          <Button onClick={this.checkOut}>Checkout now</Button>
-          }
+          {this.state.firstName == "" ||
+          this.state.lastName == "" ||
+          this.state.email != "" ||
+          this.state.phoneNumber != "" ||
+          this.state.address != "" ? (
+            <Button disabled>Please enter contact info</Button>
+          ) : (
+            <Paypal
+              val={this.state.total}
+              name={this.state.firstName}
+              callback={this.checkOut}
+            />
+          )}
+          <div style={{ width: "20px" }}></div>
+          {this.state.checkout ? (
+            <Button disabled>Checkout now</Button>
+          ) : (
+            <Button onClick={this.checkOut}>Checkout now</Button>
+          )}
         </div>
       </div>
     );
