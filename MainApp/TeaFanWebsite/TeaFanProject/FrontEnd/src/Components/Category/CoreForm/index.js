@@ -134,27 +134,6 @@ export class ShopForm extends Component {
                 </List.Item>
               )}
             />
-            {/* <div className="product-list-box">
-              <div className="product-card">
-                <img
-                  src="https://cdn.shopify.com/s/files/1/0311/4398/5197/products/THROAT_THERAPY_0ec26ed5-a3e2-48f2-883e-36a5ea4f51b2_600x.jpg?v=1630533835"
-                  alt="product"
-                  className="product-img"
-                />
-                <h3>{this.state.products.max}</h3>
-                <div className="product-price">
-                  <h3>5.55</h3>
-                  <h2>5.85 $</h2>
-                </div>
-                <Button className="addbtn">Add to cart</Button>
-                <div className="flavor-span">
-                  <span>
-                    <i className="far fa-lemon"></i> Flavor:{" "}
-                  </span>
-                </div>
-              </div>
-            </div> */}
-            {/* <Pagination className="pagination" defaultCurrent={1} total={50} /> */}
           </div>
         </div>
       </div>

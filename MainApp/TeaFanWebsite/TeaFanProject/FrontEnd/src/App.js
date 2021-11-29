@@ -42,7 +42,7 @@ function App() {
           </Switch>
         </Col>
       </Container>
-      {/* <Footer></Footer> */}
+      <Footer></Footer>
     </div>
   );
 }

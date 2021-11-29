@@ -1,0 +1,53 @@
+#components-layout-demo-side .logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+.site-layout-header {
+  background: #f0f2f5;
+  padding: 10px 20px;
+}
+.site-layout-header h1 {
+  font-size: 22px;
+  color: #0bab64;
+}
+.ant-layout-sider-children {
+  background-color: #3bb78f;
+  background-image: linear-gradient(315deg, #3bb78f 0%, #0bab64 74%);
+}
+.ant-layout-sider-trigger {
+  background: #233329;
+}
+.menu-sider {
+  background: transparent !important;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+}
+.ant-menu-submenu-selected {
+  color: #fff;
+}
+.ant-menu-light .ant-menu-item:hover,
+.ant-menu-light .ant-menu-item-active,
+.ant-menu-light .ant-menu-submenu-active {
+  color: #fff;
+}
+.ant-menu-submenu-title:hover {
+  color: #0bab64 !important;
+  background: #fff;
+}
+.ant-menu-submenu:hover
+  > .ant-menu-submenu-title
+  > .ant-menu-submenu-expand-icon,
+.ant-menu-submenu:hover > .ant-menu-submenu-title > .ant-menu-submenu-arrow {
+  color: #0bab64;
+}
+.ant-menu-submenu > .ant-menu-submenu-title > .ant-menu-submenu-expand-icon,
+.ant-menu-inline-collapsed .ant-menu-submenu-arrow,
+.ant-menu-submenu-inline .ant-menu-submenu-arrow {
+  color: white;
+}

@@ -4,6 +4,7 @@ import ShopForm from "../../Components/Category/CoreForm";
 
 export default function CateShop() {
   const cateID = useParams()?.id;
+  console.log(cateID);
   return (
     <div>
       <ShopForm cateID={cateID} />

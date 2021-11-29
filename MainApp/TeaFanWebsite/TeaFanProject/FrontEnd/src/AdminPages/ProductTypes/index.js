@@ -1,5 +1,6 @@
 import "./style.css";
 import React, { useState, useEffect, useContext, useRef } from "react";
+import { useLocation, useParams } from "react-router";
 import {
   Layout,
   Menu,
@@ -11,24 +12,21 @@ import {
   Modal,
   Select,
 } from "antd";
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
-import { Link, Route, Router } from "react-router-dom";
 import AdminApi from "../../Api/AdminApi";
-import ProductApi from "../../Api/ProductApi";
 import HomeApi from "../../Api/HomeApi";
-const { Header, Sider, Content } = Layout;
 
-function ManageHome(props) {
+function ProductTypes(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [productList, setProductList] = useState([]);
-  const [categoryList, setCategoryList] = useState([]);
+  const [productType, setProductType] = useState([]);
   const [typename, setTypename] = useState("");
   const [categoryID, setCategoryID] = useState(0);
   const EditableContext = React.createContext(null);
+  const cateID = useParams()?.id;
+  useEffect(() => {
+    HomeApi.getProductType(cateID).then((res) => {
+      setProductType(res.data);
+    });
+  }, [cateID]);
   const EditableRow = ({ index, ...props }) => {
     const [form] = Form.useForm();
     return (
@@ -110,24 +108,20 @@ function ManageHome(props) {
   const columns = [
     {
       title: "ID",
-      key: "categoryID",
-      dataIndex: "categoryID",
+      key: "typeID",
+      dataIndex: "typeID",
     },
     {
       title: "Product Type",
-      dataIndex: "productTypes",
-      key: "categoryID",
+      dataIndex: "typeName",
+      key: "typeID",
     },
-    {
-      title: "Category",
-      dataIndex: "categoryName",
-      key: "categoryID",
-    },
+
     {
       title: "Action",
       dataIndex: "operation",
       render: (_, record) =>
-        productList.length >= 1 ? (
+        productType.length >= 1 ? (
           <Popconfirm
             title="Sure to delete?"
             onConfirm={() => handleDelete(record)}
@@ -139,10 +133,10 @@ function ManageHome(props) {
   ];
   //Xu ly Delete
   const handleDelete = (item) => {
-    AdminApi.removeProductType(item.productID).then((res) => {
-      // ProductAdminApi.getListAdmin(1).then((res) => {
-      //   setProductList(res.items);
-      // });
+    AdminApi.removeProductType(item.typeID).then((res) => {
+      HomeApi.getProductType(cateID).then((res) => {
+        setProductType(res.data);
+      });
     });
   };
   //Xu ly Add
@@ -164,21 +158,21 @@ function ManageHome(props) {
     AdminApi.addProductType({
       categoryID: categoryID,
       typeName: typename,
-      // }).then((res) => {
-      //   ProductAdminApi.getListAdmin(1).then((res) => {
-      //     setProductList(res.items);
-      //   });
+    }).then((res) => {
+      HomeApi.getProductType(cateID).then((res) => {
+        setProductType(res.data);
+      });
     });
     setIsModalVisible(false);
   };
 
   //Xu ly Save
   const handleSave = (row) => {
-    const newData = [...productList];
+    const newData = [...productType];
     const index = newData.findIndex((item) => row.key === item.key);
     const item = newData[index];
     newData.splice(index, 1, { ...item, ...row });
-    setProductList(newData);
+    setProductType(newData);
   };
 
   const components = {
@@ -203,11 +197,7 @@ function ManageHome(props) {
       }),
     };
   });
-  useEffect(() => {
-    AdminApi.getListProduct(1).then((res) => {
-      setProductList(res.items);
-    });
-  }, []);
+
   // Xử lý Modal Form
   const layout = {
     labelCol: {
@@ -248,10 +238,10 @@ function ManageHome(props) {
           marginBottom: 16,
         }}
       >
-        Add a product
+        Add product type
       </Button>
       <Modal
-        title="Add a Product"
+        title="Add a Product type"
         visible={isModalVisible}
         onOk={handleAdd}
         onCancel={handleCancel}
@@ -307,11 +297,11 @@ function ManageHome(props) {
         components={components}
         rowClassName={() => "editable-row"}
         bordered
-        dataSource={getCategories}
+        dataSource={productType}
         columns={columns}
       />
     </div>
   );
 }
 
-export default ManageHome;
+export default ProductTypes;

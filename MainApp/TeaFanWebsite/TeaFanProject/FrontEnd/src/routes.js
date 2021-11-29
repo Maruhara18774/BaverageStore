@@ -6,7 +6,7 @@ import CateShop from "./Pages/Category";
 import Detail from "./Pages/Detail";
 import CartForm from "./Pages/Cart/CartForm";
 import CheckoutForm from "./Pages/Cart/Checkout";
-import ManageHome from "./AdminPages/ManageHome";
+import AdminHome from "./AdminPages/Home";
 var routes = [
   {
     path: "/home",
@@ -65,10 +65,10 @@ var routes = [
     isSideBar: true,
   },
   {
-    path: "/managehome",
+    path: "/admin",
     name: "Manage Home",
     icon: "fas fa-home",
-    component: ManageHome,
+    component: AdminHome,
     isSideBar: true,
   },
 ];
