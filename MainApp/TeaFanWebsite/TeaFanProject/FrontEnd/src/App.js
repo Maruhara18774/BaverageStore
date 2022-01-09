@@ -6,6 +6,7 @@ import Nav from "./Components/Nav";
 import routes from "./routes.js";
 import { Container, Col } from "reactstrap";
 import Footer from "./Components/Footer";
+import { WindowsFilled } from "@ant-design/icons";
 
 function App() {
   const mainContent = React.useRef(null);
@@ -33,7 +34,8 @@ function App() {
       ref={mainContent}
       style={{ minHeight: "100vh", position: "relative" }}
     >
-      {/* <Nav></Nav> */}
+      {window.location.pathname.includes("/admin") ? null : <Nav></Nav>}
+
       <Container fluid className="d-flex pt-md-5 flex-column flex-md-row">
         <Col className="px-2 py-3">
           <Switch>

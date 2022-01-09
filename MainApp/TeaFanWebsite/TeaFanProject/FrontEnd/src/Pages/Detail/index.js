@@ -89,6 +89,7 @@ export default function Detail(props) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  console.log(localStorage.user);
 
   // const CommentList = ({ comments }) => (
   //   <List
@@ -221,83 +222,85 @@ export default function Detail(props) {
           </div>
         </div>
       )}
-      <div className="review-rating">
-        <div className="review-rating-wrapper">
-          <div className="review-header">
-            <h1>Ratings & Reviews</h1>
-            <Button>Write a review</Button>
-          </div>
-          <List
-            className="comment-list"
-            header={`${totalfeedback} replies`}
-            itemLayout="horizontal"
-            dataSource={feedback}
-            pagination={{
-              onChange: (page) => {
-                ProductApi.getListfeedback({
-                  page: page,
-                  productID: props.match.params.id,
-                }).then((res) => {
-                  setFeedback(res.data.items);
-                  setTotalfeedback(res.data.totalRecords);
-                });
-              },
-              pageSize: 5,
-              totalItem: totalfeedback,
-            }}
-            renderItem={(item) => (
-              <li>
-                <Comment className="comment">
-                  <Row>
-                    <Col span={4}>
-                      <span className="comment-date">
-                        {moment(item.createDate).format("DD/MM/YYYY")}
-                      </span>
-                      <h4 className="comment-name">{item.fullName}</h4>
-                      <Rate value={item.starCount} />
-                    </Col>
-                    <Col span={16}>
-                      <h4 className="comment-title">{item.title}</h4>
-                      <p className="comment-content">{item.content}</p>
-                    </Col>
-                  </Row>
-                </Comment>
-              </li>
-            )}
-          />
-          <div className="add-cmt" style={{ marginTop: "20px" }}>
-            <Form.Item>
-              <div className="cmt-title">
-                <Input
-                  className="title-input"
-                  placeholder="Title"
-                  type="text"
-                  value={titleComment}
-                  onChange={onChangeTitle}
-                ></Input>
-                <Rate value={rateComment} onChange={onChangeRate} />
-              </div>
-              <div style={{ display: "flex", marginTop: "20px" }}>
-                <TextArea
-                  rows={4}
-                  value={comment}
-                  onChange={onChangeComment}
-                  placeholder="Your review..."
-                />
-              </div>
-            </Form.Item>
-            <Form.Item>
-              <Button
-                htmlType="submit"
-                onClick={onSubmitComment}
-                type="primary"
-              >
-                Add Review
-              </Button>
-            </Form.Item>
+      {localStorage.user === undefined ? null : (
+        <div className="review-rating">
+          <div className="review-rating-wrapper">
+            <div className="review-header">
+              <h1>Ratings & Reviews</h1>
+              <Button>Write a review</Button>
+            </div>
+            <List
+              className="comment-list"
+              header={`${totalfeedback} replies`}
+              itemLayout="horizontal"
+              dataSource={feedback}
+              pagination={{
+                onChange: (page) => {
+                  ProductApi.getListfeedback({
+                    page: page,
+                    productID: props.match.params.id,
+                  }).then((res) => {
+                    setFeedback(res.data.items);
+                    setTotalfeedback(res.data.totalRecords);
+                  });
+                },
+                pageSize: 5,
+                totalItem: totalfeedback,
+              }}
+              renderItem={(item) => (
+                <li>
+                  <Comment className="comment">
+                    <Row>
+                      <Col span={4}>
+                        <span className="comment-date">
+                          {moment(item.createDate).format("DD/MM/YYYY")}
+                        </span>
+                        <h4 className="comment-name">{item.fullName}</h4>
+                        <Rate value={item.starCount} />
+                      </Col>
+                      <Col span={16}>
+                        <h4 className="comment-title">{item.title}</h4>
+                        <p className="comment-content">{item.content}</p>
+                      </Col>
+                    </Row>
+                  </Comment>
+                </li>
+              )}
+            />
+            <div className="add-cmt" style={{ marginTop: "20px" }}>
+              <Form.Item>
+                <div className="cmt-title">
+                  <Input
+                    className="title-input"
+                    placeholder="Title"
+                    type="text"
+                    value={titleComment}
+                    onChange={onChangeTitle}
+                  ></Input>
+                  <Rate value={rateComment} onChange={onChangeRate} />
+                </div>
+                <div style={{ display: "flex", marginTop: "20px" }}>
+                  <TextArea
+                    rows={4}
+                    value={comment}
+                    onChange={onChangeComment}
+                    placeholder="Your review..."
+                  />
+                </div>
+              </Form.Item>
+              <Form.Item>
+                <Button
+                  htmlType="submit"
+                  onClick={onSubmitComment}
+                  type="primary"
+                >
+                  Add Review
+                </Button>
+              </Form.Item>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

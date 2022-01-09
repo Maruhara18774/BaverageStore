@@ -20,6 +20,7 @@ function AdminHome(props) {
       setGetCategories(res.data);
     });
   }, []);
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
