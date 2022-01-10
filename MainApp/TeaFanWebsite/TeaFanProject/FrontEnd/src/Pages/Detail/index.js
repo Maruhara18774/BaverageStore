@@ -222,51 +222,52 @@ export default function Detail(props) {
           </div>
         </div>
       )}
-      {localStorage.user === undefined ? null : (
-        <div className="review-rating">
-          <div className="review-rating-wrapper">
-            <div className="review-header">
-              <h1>Ratings & Reviews</h1>
-              <Button>Write a review</Button>
-            </div>
-            <List
-              className="comment-list"
-              header={`${totalfeedback} replies`}
-              itemLayout="horizontal"
-              dataSource={feedback}
-              pagination={{
-                onChange: (page) => {
-                  ProductApi.getListfeedback({
-                    page: page,
-                    productID: props.match.params.id,
-                  }).then((res) => {
-                    setFeedback(res.data.items);
-                    setTotalfeedback(res.data.totalRecords);
-                  });
-                },
-                pageSize: 5,
-                totalItem: totalfeedback,
-              }}
-              renderItem={(item) => (
-                <li>
-                  <Comment className="comment">
-                    <Row>
-                      <Col span={4}>
-                        <span className="comment-date">
-                          {moment(item.createDate).format("DD/MM/YYYY")}
-                        </span>
-                        <h4 className="comment-name">{item.fullName}</h4>
-                        <Rate value={item.starCount} />
-                      </Col>
-                      <Col span={16}>
-                        <h4 className="comment-title">{item.title}</h4>
-                        <p className="comment-content">{item.content}</p>
-                      </Col>
-                    </Row>
-                  </Comment>
-                </li>
-              )}
-            />
+
+      <div className="review-rating">
+        <div className="review-rating-wrapper">
+          <div className="review-header">
+            <h1>Ratings & Reviews</h1>
+            <Button>Write a review</Button>
+          </div>
+          <List
+            className="comment-list"
+            header={`${totalfeedback} replies`}
+            itemLayout="horizontal"
+            dataSource={feedback}
+            pagination={{
+              onChange: (page) => {
+                ProductApi.getListfeedback({
+                  page: page,
+                  productID: props.match.params.id,
+                }).then((res) => {
+                  setFeedback(res.data.items);
+                  setTotalfeedback(res.data.totalRecords);
+                });
+              },
+              pageSize: 5,
+              totalItem: totalfeedback,
+            }}
+            renderItem={(item) => (
+              <li>
+                <Comment className="comment">
+                  <Row>
+                    <Col span={4}>
+                      <span className="comment-date">
+                        {moment(item.createDate).format("DD/MM/YYYY")}
+                      </span>
+                      <h4 className="comment-name">{item.fullName}</h4>
+                      <Rate value={item.starCount} />
+                    </Col>
+                    <Col span={16}>
+                      <h4 className="comment-title">{item.title}</h4>
+                      <p className="comment-content">{item.content}</p>
+                    </Col>
+                  </Row>
+                </Comment>
+              </li>
+            )}
+          />
+          {localStorage.user === undefined ? null : (
             <div className="add-cmt" style={{ marginTop: "20px" }}>
               <Form.Item>
                 <div className="cmt-title">
@@ -298,9 +299,9 @@ export default function Detail(props) {
                 </Button>
               </Form.Item>
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
