@@ -1,0 +1,13 @@
+.wrap{
+    margin-top: 100px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.profie-content{
+    background-color: gainsboro;
+    width: 100%;
+    padding-left:20%;
+    padding-right: 20%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

@@ -1,0 +1,49 @@
+footer {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100%;
+  background-color: #fff;
+  margin-top: 2%;
+}
+.footer-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #f1eeee;
+  padding: 8px;
+}
+.footer-input {
+  width: 30% !important;
+}
+.shop-about {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.shop {
+  width: 48%;
+}
+.about {
+  width: 48%;
+}
+.footer-footer {
+  padding-top: 20px;
+}
+.footer-footer ul {
+  padding-left: 0;
+  line-height: 2vw;
+}
+.footer-footer ul li {
+  list-style: none;
+}
+.footer-footer h4 {
+  font-weight: 700;
+  color: #d3d3d3;
+}
+.footer-icons {
+  display: flex;
+  align-items: center;
+}
+.footer-icons i {
+  margin-right: 2vw;
+  margin-top: 0;
+}
